@@ -4,31 +4,35 @@
     대여시 가능 여부 확인 (대여자의 기존책 반납 여부)
 
 ## 설계  
-class Book  
-	 state  
-	 name  
-	 writer  
-	 isbn  
-	 Person* borrower  
-	 borrowDate  
-	 returnDate  
-  
-pulbic:  
-	 getter()  
-	 stateToggle()  
-	
 
-class Person  
-	 name  
-	 id  
-	 borrowCount	// 최대 2권  
-	 Book* borrowBooks[2]  
+### 클래스 구성
+```
+class Book {
+	state  
+	name  
+	writer  
+	isbn  
+	Person* borrower  
+	borrowDate  
+	returnDate  
+public:  
+	getsth() 			// get info about private 
+	stateToggle()  
+};
 
-class Manage  
-	 Book* []  
-	 canBorrow()  
-	 add()  
-	 delete()  
-	 search()  
-	
+class Person {
+	name  
+	id  
+	borrowCount			// how many books borrowed .. max = 2
+	Book* borrowBooks[2]		// list of books that user borrowed
+};
+
+class Manage {
+	Book* []  
+	canBorrow()  
+	add()  
+	delete()  
+	search()
+};
+```	
 
