@@ -19,9 +19,14 @@ public:
 	int searchByWriter(string writer);
 	int searchByIsbn(string isbn);
 	void Borrow(int idx_b, int idx_u);
-	int findUserIdx(string s);
+
 	void makeBackupFile(const char* file_directory);
 	void loadBackupFile(const char* file_directory);
 	void printAll();
+
+	// user 관련 내용 
+	int findUserIdx(string s);
+	void addUser(string s);
+	void deleteUser(string s);
 };
 #endif

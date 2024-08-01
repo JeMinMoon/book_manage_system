@@ -15,15 +15,15 @@ void BookManage::addBook(string name, string writer, string isbn) {
 
 void BookManage::deleteBook(int index) {
 	books.erase(books.begin() + index);
+	cout << "delete success" << endl;
 }
 
 int BookManage::searchByName(string name) {
-	cout << "start searching... " << endl;
+	cout << "start searching... " << endl << endl;
 	books_searched.clear();
 	for (int i = 0; i < books.size(); i++) {
 		if (books[i].getName() == name) {
-			cout << books_searched.size() << endl;
-			cout << "bookname: " << books[i].getName() << endl;
+			cout << books_searched.size() << ". bookname: " << books[i].getName() << endl;
 			cout << "writer: " << books[i].getWriter() << endl;
 			books_searched.push_back(&books[i]);		// 찾은 책들을 books_searched 벡터에 넣음 
 		}
@@ -133,4 +133,16 @@ int BookManage::findUserIdx(string s) {
 	}
 	cout << "cannot find user" << endl;
 	return -1;
+}
+
+void BookManage::addUser(string s) {
+	user_list.push_back(new Person(s));
+}
+
+void BookManage::deleteUser(string s) {
+	int idx = findUserIdx(s);
+	if (idx != -1) {
+		user_list.erase(user_list.begin() + idx);
+		cout << "delete success" << endl;
+	}
 }

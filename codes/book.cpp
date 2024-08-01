@@ -7,6 +7,11 @@ Book::Book(string name, string writer, string isbn) {
 	this->writer = writer;
 	this->isbn = isbn;
 }
+
+Book::Book() { 
+	borrowDate = 0; returnDate = 0; 
+};
+
 int Book::getState() { return state; }
 string Book::getName() { return name; }
 string Book::getWriter() { return writer; }

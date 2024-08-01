@@ -12,6 +12,7 @@ class Person {
 	Book* borrowBooks[2];
 public:
 	Person();
+	Person(string s);
 	string getName();
 	int getId();
 	bool checkCanBorrow();
