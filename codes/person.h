@@ -6,14 +6,13 @@ using namespace std;
 
 class Book;
 class Person {
-	string name;
+	char name[30];
 	int	id;
 	int borrowCount;	 // max = 2
 	Book* borrowBooks[2];
 public:
 	Person();
-	Person(string s);
-	string getName();
+	char* getName();
 	int getId();
 	bool checkCanBorrow();
 	void Borrow(Book* b);

@@ -15,15 +15,15 @@ void BookManage::addBook(const char* name, const char* writer, const char* isbn)
 
 void BookManage::deleteBook(int index) {
 	books.erase(books.begin() + index);
-	cout << "delete success" << endl;
 }
 
 int BookManage::searchByName(const char* name) {
-	cout << "start searching... " << endl << endl;
+	cout << "start searching... " << endl;
 	books_searched.clear();
 	for (int i = 0; i < books.size(); i++) {
 		if (!strcmp(books[i].getName(), name)) {
-			cout << books_searched.size() << ". bookname: " << books[i].getName() << endl;
+			cout << books_searched.size() << endl;
+			cout << "bookname: " << books[i].getName() << endl;
 			cout << "writer: " << books[i].getWriter() << endl;
 			books_searched.push_back(&books[i]);		// 찾은 책들을 books_searched 벡터에 넣음 
 		}
@@ -60,16 +60,19 @@ int BookManage::searchByIsbn(const char* isbn) {
 
 void BookManage::makeBackupFile(const char* file_directory) {
 	try {
-		FILE* fp = NULL;
-		fopen_s(&fp, file_directory, "w");
-		if (fp == NULL) {
+		ofstream ofs(file_directory);
+		if (!ofs) {
 			throw "파일 오픈 실패\n";
-			fclose(fp);
+			ofs.close();
 		}
+		for (auto& i : books) {
+			ofs.write(reinterpret_cast<const char*>(i.getName()), sizeof(char)*NAME_SIZE);
+			ofs.write(reinterpret_cast<const char*>(i.getWriter()), sizeof(char)*NAME_SIZE);
+		}
+		
+		//fwrite(&books, sizeof(Book), books.size(), fp);
 
-		fwrite(&books, sizeof(Book), books.size(), fp);
-
-		fclose(fp);
+		ofs.close();
 	}
 	catch (const char* s) {
 		cout << s;
@@ -127,22 +130,10 @@ void BookManage::Borrow(int idx_b, int idx_u) {
 
 int BookManage::findUserIdx(const char* s) {
 	for (int i = 0; i < user_list.size(); i++) {
-		if (!strcmp(user_list[i]->getName(), s)) {
+		if (!strcmp(user_list[i]->getName(),s)) {
 			return i;
 		}
 	}
 	cout << "cannot find user" << endl;
 	return -1;
-}
-
-void BookManage::addUser(string s) {
-	user_list.push_back(new Person(s));
-}
-
-void BookManage::deleteUser(string s) {
-	int idx = findUserIdx(s);
-	if (idx != -1) {
-		user_list.erase(user_list.begin() + idx);
-		cout << "delete success" << endl;
-	}
 }

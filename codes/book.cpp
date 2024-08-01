@@ -1,17 +1,13 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-using namespace std;
 #include "book.h"
+using namespace std;
 
 Book::Book(const char* name, const char* writer, const char* isbn) {
 	strcpy(this->name, name);
 	strcpy(this->writer, writer);
 	strcpy(this->isbn, isbn);
 }
-
-Book::Book() { 
-	borrowDate = 0; returnDate = 0; 
-};
-
 int Book::getState() { return state; }
 char* Book::getName() { return name; }
 char* Book::getWriter() { return writer; }

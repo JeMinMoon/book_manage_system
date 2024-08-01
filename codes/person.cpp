@@ -3,8 +3,7 @@ using namespace std;
 #include "person.h"
 
 Person::Person() { borrowCount = 0; }
-Person::Person(string s) { name = s; borrowCount = 0; }
-string Person::getName() { return name; }
+char* Person::getName() { return name; }
 int Person::getId() { return id; }
 bool Person::checkCanBorrow() {
 	if (borrowCount < 2) { // 대출 권수 2권 미만이라 대출 가능 

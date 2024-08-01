@@ -3,6 +3,8 @@
 #include "book.h"
 #include <iostream>
 #include <vector>
+#include <fstream>
+#define NAME_SIZE 30
 using namespace std;
 
 class BookManage {
@@ -13,20 +15,15 @@ public:
 	BookManage();
 	~BookManage();
 	bool canBorrow(Book* b);
-	void addBook(string n, string w, string i);
+	void addBook(const char* n, const char* w, const char* i);
 	void deleteBook(int index);
-	int searchByName(string name); // books 벡터의 인덱스를 리턴하도록 구현
-	int searchByWriter(string writer);
-	int searchByIsbn(string isbn);
+	int searchByName(const char* name); // books 벡터의 인덱스를 리턴하도록 구현
+	int searchByWriter(const char* writer);
+	int searchByIsbn(const char* isbn);
 	void Borrow(int idx_b, int idx_u);
-
+	int findUserIdx(const char* s);
 	void makeBackupFile(const char* file_directory);
 	void loadBackupFile(const char* file_directory);
 	void printAll();
-
-	// user 관련 내용 
-	int findUserIdx(string s);
-	void addUser(string s);
-	void deleteUser(string s);
 };
 #endif
