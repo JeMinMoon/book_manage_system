@@ -2,7 +2,7 @@
 
 BookManage::BookManage() {}
 BookManage::~BookManage() {
-	delete[] & books;
+	
 }
 
 bool BookManage::canBorrow(Book* b) {
@@ -58,55 +58,56 @@ int BookManage::searchByIsbn(const char* isbn) {
 	return -1; // 못 찾은 경우
 }
 
-void BookManage::makeBackupFile(const char* file_directory) {
+void BookManage::saveBookFile(const char* file_directory) {
 	try {
-		ofstream ofs(file_directory);
+		ofstream ofs(file_directory, ios::binary);
 		if (!ofs) {
 			throw "파일 오픈 실패\n";
-			ofs.close();
 		}
+
 		for (auto& i : books) {
-			ofs.write(reinterpret_cast<const char*>(i.getName()), sizeof(char)*NAME_SIZE);
-			ofs.write(reinterpret_cast<const char*>(i.getWriter()), sizeof(char)*NAME_SIZE);
+			ofs.write(reinterpret_cast<const char*>(&i), sizeof(Book));
 		}
-		
-		//fwrite(&books, sizeof(Book), books.size(), fp);
+
 
 		ofs.close();
 	}
 	catch (const char* s) {
 		cout << s;
 	}
+	cout << "저장 완료\n";
 }
 
-void BookManage::loadBackupFile(const char* file_directory) {
+void BookManage::loadBookFile(const char* file_directory) {
+	books.clear();
 	try {
-		FILE* fp = NULL;
-		fopen_s(&fp, file_directory, "r");
-		if (fp == NULL) {
+		ifstream ifs(file_directory, ios::binary);
+		if (!ifs) {
 			throw "파일 오픈 실패\n";
-			fclose(fp);
+		}
+		Book temp;
+		while (ifs.read(reinterpret_cast<char*>(&temp), sizeof(Book))) {
+			books.push_back(temp);
 		}
 
-		fread(&books, sizeof(Book), books.size(), fp);
-
-		fclose(fp);
+		ifs.close();
 	}
 	catch (const char* s) {
 		cout << s;
 	}
+	cout << "로드 완료\n";
 }
 
-void BookManage::printAll() {
+void BookManage::printAllBooks() {
 	for (auto& i : books) {
-		cout << "도서명: " << i.getName() << "저자: " << i.getWriter() << "ISBN: " << i.getIsbn();
+		cout << "도서명:" << i.getName() << " 저자:" << i.getWriter() << " ISBN:" << i.getIsbn();
 		if (i.getState()) {
-			cout << "대출 가능 여부: O";
+			cout << " 대출 가능 여부:O";
 		}
 		else {
-			cout << "대출 가능 여부: X";
+			cout << " 대출 가능 여부:X";
 		}
-		cout << "대출일: " << i.getborrowData() << "반납예정일: " << i.getreturnDate() << '\n';
+		cout << " 대출일:" << i.getborrowData() << " 반납예정일:" << i.getreturnDate() << '\n';
 	}
 }
 

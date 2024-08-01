@@ -22,9 +22,9 @@ public:
 	int searchByIsbn(const char* isbn);
 	void Borrow(int idx_b, int idx_u);
 
-	void makeBackupFile(const char* file_directory);
-	void loadBackupFile(const char* file_directory);
-	void printAll();
+	void saveBookFile(const char* file_directory);
+	void loadBookFile(const char* file_directory);
+	void printAllBooks();
 	void printOne(int idx);
 
 	// user 관련 내용 

@@ -5,6 +5,7 @@
 #include "bookManage.h"
 
 int main() {
+	const char* book_file_directory = "book_file.txt";
 	int menu;
 	BookManage bm;
 	char n[30];
