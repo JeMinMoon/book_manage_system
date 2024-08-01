@@ -9,7 +9,7 @@ bool BookManage::canBorrow(Book* b) {
 	return !b->getState();
 }
 
-void BookManage::addBook(string name, string writer, string isbn) {
+void BookManage::addBook(const char* name, const char* writer, const char* isbn) {
 	books.push_back(*(new Book(name, writer, isbn)));
 }
 
@@ -18,11 +18,11 @@ void BookManage::deleteBook(int index) {
 	cout << "delete success" << endl;
 }
 
-int BookManage::searchByName(string name) {
+int BookManage::searchByName(const char* name) {
 	cout << "start searching... " << endl << endl;
 	books_searched.clear();
 	for (int i = 0; i < books.size(); i++) {
-		if (books[i].getName() == name) {
+		if (!strcmp(books[i].getName(), name)) {
 			cout << books_searched.size() << ". bookname: " << books[i].getName() << endl;
 			cout << "writer: " << books[i].getWriter() << endl;
 			books_searched.push_back(&books[i]);		// 찾은 책들을 books_searched 벡터에 넣음 
@@ -41,17 +41,17 @@ int BookManage::searchByName(string name) {
 	}
 }
 
-int BookManage::searchByWriter(string writer) {
+int BookManage::searchByWriter(const char* writer) {
 	for (int i = 0; i < books.size(); i++) {
-		if (books[i].getWriter() == writer) {
+		if (!strcmp(books[i].getWriter(), writer)) {
 			return i;
 		}
 	}
 	return -1; // 못 찾은 경우
 }
-int BookManage::searchByIsbn(string isbn) {
+int BookManage::searchByIsbn(const char* isbn) {
 	for (int i = 0; i < books.size(); i++) {
-		if (books[i].getIsbn() == isbn) {
+		if (!strcmp(books[i].getIsbn(), isbn)) {
 			return i;
 		}
 	}
@@ -125,9 +125,9 @@ void BookManage::Borrow(int idx_b, int idx_u) {
 	}
 }
 
-int BookManage::findUserIdx(string s) {
+int BookManage::findUserIdx(const char* s) {
 	for (int i = 0; i < user_list.size(); i++) {
-		if (user_list[i]->getName() == s) {
+		if (!strcmp(user_list[i]->getName(), s)) {
 			return i;
 		}
 	}

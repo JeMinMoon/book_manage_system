@@ -2,10 +2,10 @@
 using namespace std;
 #include "book.h"
 
-Book::Book(string name, string writer, string isbn) {
-	this->name = name;
-	this->writer = writer;
-	this->isbn = isbn;
+Book::Book(const char* name, const char* writer, const char* isbn) {
+	strcpy(this->name, name);
+	strcpy(this->writer, writer);
+	strcpy(this->isbn, isbn);
 }
 
 Book::Book() { 
@@ -13,9 +13,9 @@ Book::Book() {
 };
 
 int Book::getState() { return state; }
-string Book::getName() { return name; }
-string Book::getWriter() { return writer; }
-string Book::getIsbn() { return isbn; }
+char* Book::getName() { return name; }
+char* Book::getWriter() { return writer; }
+char* Book::getIsbn() { return isbn; }
 Person* Book::getBorrower() { return borrower; }		
 int Book::getborrowData() { return borrowDate; }
 int Book::getreturnDate() { return returnDate; }
