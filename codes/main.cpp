@@ -5,6 +5,7 @@
 #include "bookManage.h"
 
 int main() {
+	const char* book_file_directory = "book_file.txt";
 	int menu;
 	BookManage bm;
 	char n[30];
@@ -14,7 +15,7 @@ int main() {
 	int idx;
 	int idx_b;
 	int idx_u;
-
+	
 	cout << "====================================" << endl;
 	cout << "------- Library System Start -------" << endl << endl;
 
@@ -75,4 +76,6 @@ int main() {
 	cout << endl;
 	cout << "-------- Library System End --------" << endl;
 	cout << "====================================" << endl;
+
+	return 0;
 }

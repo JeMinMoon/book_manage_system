@@ -8,10 +8,11 @@
 using namespace std;
 
 class BookManage {
-	vector<Book> books;
+	
 	vector<Book*> books_searched;
 	vector<Person*> user_list;
 public:
+	vector<Book> books; //µð¹ö±ë ¶§¹®¿¡ ¿Å±è
 	BookManage();
 	~BookManage();
 	bool canBorrow(Book* b);
@@ -22,8 +23,8 @@ public:
 	int searchByIsbn(const char* isbn);
 	void Borrow(int idx_b, int idx_u);
 	int findUserIdx(const char* s);
-	void makeBackupFile(const char* file_directory);
-	void loadBackupFile(const char* file_directory);
-	void printAll();
+	void saveBookFile(const char* file_directory);
+	void loadBookFile(const char* file_directory);
+	void printAllBooks();
 };
 #endif
