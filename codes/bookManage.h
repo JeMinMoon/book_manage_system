@@ -2,12 +2,18 @@
 #define _BOOKMANAGE_H
 #include "book.h"
 #include <iostream>
-class Manage {
-	Book* books[];
+#include <vector>
+using namespace std;
+class BookManage {
+	vector<Book*> books;
 public:
-	bool canBorrow();
-	void add();
-	void deleteBook();
-	Book* search();
+	BookManage();
+	~BookManage();
+	bool canBorrow(Book* b);
+	void addBook(string n, string w, string i);
+	void deleteBook(int index);
+	int searchByName(string name); // books 벡터의 인덱스를 리턴하도록 구현
+	int searchByWriter(string writer);
+	int searchByIsbn(string isbn);
 };
 #endif
