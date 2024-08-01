@@ -1,35 +1,67 @@
 #include <iostream>
 #include <string>
-using namespace std;
 #include "book.h"
 #include "person.h"
 #include "bookManage.h"
 
 int main() {
 	int menu;
+	BookManage bm;
+	string n, w, i;
 
 	cout << "====================================" << endl;
 	cout << "------- Library System Start -------" << endl << endl;
 
 	while (1) {
 		cout << "--------------- Menu ---------------" << endl;
+		cout << "0. Exit Program" << endl;
 		cout << "1. Add Books " << endl;
 		cout << "2. Delete Books" << endl;
 		cout << "3. Search Books" << endl;
 		cout << "4. Rent Book" << endl;
-		cout << "Enter 0 to exit" << endl;
 		cout << "Select Menu: ";
 		cin >> menu;
 		if (menu == 0) break;
+		cout << endl;
 
 		switch (menu) {
-		case 1:
+		case 1: { // add books 
+			while (1) {
+				cout << endl;
+				cout << "Enter 0 to exit" << endl;
+				cout << "Enter book name: " << endl;
+				cin >> n;
+				if (n == "0") break;
+				cout << "Enter writer: " << endl;
+				cin >> w;
+				cout << "Enter ISBN: " << endl;
+				cin >> i;
+				bm.addBook(n, w, i);
+			}
 			break;
-		case 2:
+		}
+		case 2: // delete book
+			cout << "Enter book name: " << endl;
+			cin >> n;
+			int idx = bm.searchByName(n);
+			if (idx != -1) bm.deleteBook(idx);
 			break; 
-		case 3:
+		case 3: // search book
+			cout << "Enter book name: " << endl;
+			cin >> n;
+			int idx = bm.searchByName(n);
 			break;
-		case 4:
+		case 4: // rent book 
+			string s;
+			cout << "Enter book name: ";
+			cin >> n;
+			int idx_b = bm.searchByName(n);
+			cout << "Enter user name: ";
+			cin >> s;
+			int idx_u = bm.findUserIdx(s);
+			if (idx != -1) {
+				bm.Borrow(idx_b, idx_u);
+			}
 			break;
 		}
 	}
