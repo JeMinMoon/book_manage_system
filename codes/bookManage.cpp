@@ -2,11 +2,11 @@
 
 BookManage::BookManage() {}
 BookManage::~BookManage() {
-	
+	delete[] & books;
 }
 
 bool BookManage::canBorrow(Book* b) {
-	return !b->getState();
+	return !b->getState(); // can borrow = 1 / c
 }
 
 void BookManage::addBook(const char* name, const char* writer, const char* isbn) {
@@ -19,11 +19,11 @@ void BookManage::deleteBook(int index) {
 
 int BookManage::searchByName(const char* name) {
 	cout << "start searching... " << endl;
+	cout << endl;
 	books_searched.clear();
 	for (int i = 0; i < books.size(); i++) {
 		if (!strcmp(books[i].getName(), name)) {
-			cout << books_searched.size() << endl;
-			cout << "bookname: " << books[i].getName() << endl;
+			cout << books_searched.size() << ". bookname: " << books[i].getName() << endl;
 			cout << "writer: " << books[i].getWriter() << endl;
 			books_searched.push_back(&books[i]);		// 찾은 책들을 books_searched 벡터에 넣음 
 		}
@@ -58,68 +58,68 @@ int BookManage::searchByIsbn(const char* isbn) {
 	return -1; // 못 찾은 경우
 }
 
-void BookManage::saveBookFile(const char* file_directory) {
+void BookManage::makeBackupFile(const char* file_directory) {
 	try {
-		ofstream ofs(file_directory, ios::binary);
+		ofstream ofs(file_directory);
 		if (!ofs) {
 			throw "파일 오픈 실패\n";
+			ofs.close();
 		}
-	
 		for (auto& i : books) {
-			ofs.write(reinterpret_cast<const char*>(&i), sizeof(Book));
+			ofs.write(reinterpret_cast<const char*>(i.getName()), sizeof(char)*NAME_SIZE);
+			ofs.write(reinterpret_cast<const char*>(i.getWriter()), sizeof(char)*NAME_SIZE);
 		}
 		
+		//fwrite(&books, sizeof(Book), books.size(), fp);
 
 		ofs.close();
 	}
 	catch (const char* s) {
 		cout << s;
 	}
-	cout << "저장 완료\n";
 }
 
-void BookManage::loadBookFile(const char* file_directory) {
-	books.clear();
+void BookManage::loadBackupFile(const char* file_directory) {
 	try {
-		ifstream ifs(file_directory, ios::binary);
-		if (!ifs) {
+		FILE* fp = NULL;
+		fopen_s(&fp, file_directory, "r");
+		if (fp == NULL) {
 			throw "파일 오픈 실패\n";
-		}
-		Book temp;
-		while (ifs.read(reinterpret_cast<char*>(&temp), sizeof(Book))) {
-			books.push_back(temp);
+			fclose(fp);
 		}
 
-		ifs.close();
+		fread(&books, sizeof(Book), books.size(), fp);
+
+		fclose(fp);
 	}
 	catch (const char* s) {
 		cout << s;
 	}
-	cout << "로드 완료\n";
 }
 
-void BookManage::printAllBooks() {
+void BookManage::printAll() {
 	for (auto& i : books) {
-		cout << "도서명:" << i.getName() << " 저자:" << i.getWriter() << " ISBN:" << i.getIsbn();
+		cout << "도서명: " << i.getName() << "저자: " << i.getWriter() << "ISBN: " << i.getIsbn();
 		if (i.getState()) {
-			cout << " 대출 가능 여부:O";
+			cout << "대출 가능 여부: O";
 		}
 		else {
-			cout << " 대출 가능 여부:X";
+			cout << "대출 가능 여부: X";
 		}
-		cout << " 대출일:" << i.getborrowData() << " 반납예정일:" << i.getreturnDate() << '\n';
+		cout << "대출일: " << i.getborrowData() << "반납예정일: " << i.getreturnDate() << '\n';
 	}
 }
 
 void BookManage::Borrow(int idx_b, int idx_u) {
-	if (canBorrow(&books[idx_b]) == 0) { // 책은 있어 
+	if (books[idx_b].getState() == 0) { // 책은 있어 
 		// 사람도 있어?
 		if (user_list[idx_u]->checkCanBorrow() == 1) { // ㅇㅇ 있어 
 			cout << "today date: 08/01" << endl;
 			cout << "return due date: 08/15" << endl;
 			// 대출 상태 변경 
 			books[idx_b].stateToggle();
-			// 대출일, 반납일, 빌린사람 추가해야하는데 함수가 없음 (수정중)
+			// 대출일, 반납일, 빌린사람 추가해야하는데 함수가 없음
+			books[idx_b].borrow(user_list[idx_u]);
 			// 사용자의 빌린 책 권수랑 빌린 책 목록 변경
 			user_list[idx_u]->Borrow(&books[idx_b]);
 		}
@@ -137,4 +137,27 @@ int BookManage::findUserIdx(const char* s) {
 	}
 	cout << "cannot find user" << endl;
 	return -1;
+}
+
+void BookManage::addUser(const char* s) {
+	user_list.push_back(new Person(s));
+}
+
+void BookManage::deleteUser(const char* s) {
+	int idx = findUserIdx(s);
+	if (idx != -1) {
+		user_list.erase(user_list.begin() + idx);
+		cout << "delete success" << endl;
+	}
+}
+
+void BookManage::printOne(int idx) {
+	cout << "도서명: " << books[idx].getName() << " / 저자: " << books[idx].getWriter() << " / ISBN: " << books[idx].getIsbn() << endl;
+	if (books[idx].getState()) {
+		cout << "대출 가능 여부: O" << endl;
+	}
+	else {
+		cout << "대출 가능 여부: X" << endl;
+	}
+	cout << "대출일: " << books[idx].getborrowData() << " / 반납예정일: " << books[idx].getreturnDate() << '\n';
 }

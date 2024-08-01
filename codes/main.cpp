@@ -5,7 +5,6 @@
 #include "bookManage.h"
 
 int main() {
-	const char* book_file_directory = "book_file.txt";
 	int menu;
 	BookManage bm;
 	char n[30];
@@ -15,9 +14,11 @@ int main() {
 	int idx;
 	int idx_b;
 	int idx_u;
-	
+
 	cout << "====================================" << endl;
-	cout << "------- Library System Start -------" << endl << endl;
+	cout << "------- Library System Start -------" << endl;
+	cout << "====================================" << endl;
+
 
 	while (1) {
 		cout << "--------------- Menu ---------------" << endl;
@@ -26,19 +27,20 @@ int main() {
 		cout << "2. Delete Books" << endl;
 		cout << "3. Search Books" << endl;
 		cout << "4. Rent Book" << endl;
+		cout << "5. Add User" << endl;
+		cout << "6. Delete User" << endl;
 		cout << "Select Menu: ";
 		cin >> menu;
 		if (menu == 0) break;
-		cout << endl;
+		cout << "------------------------------------" << endl;
 
 		switch (menu) {
 		case 1: { // add books 
 			while (1) {
 				cout << endl;
-				cout << "Enter 0 to exit" << endl;
-				cout << "Enter book name: " << endl;
+				cout << "Enter book name. Enter 'exit' to exit : " << endl;
 				cin >> n;
-				if (n == "0") break;
+				if (!strcmp(n, "exit")) break;
 				cout << "Enter writer: " << endl;
 				cin >> w;
 				cout << "Enter ISBN: " << endl;
@@ -57,25 +59,38 @@ int main() {
 			cout << "Enter book name: " << endl;
 			cin >> n;
 			idx = bm.searchByName(n);
+			if (idx != -1) {
+				cout << "Info of book that you've found is..." << endl;
+				cout << "------------------------------------" << endl;
+				bm.printOne(idx);
+				cout << "------------------------------------" << endl;
+			}
 			break;
 		case 4: // rent book 
-			
 			cout << "Enter book name: ";
 			cin >> n;
 			idx_b = bm.searchByName(n);
 			cout << "Enter user name: ";
 			cin >> s;
 			idx_u = bm.findUserIdx(s);
-			if (idx != -1) {
+			if (idx_b != -1) {
 				bm.Borrow(idx_b, idx_u);
 			}
+			break;
+		case 5: // add user info
+			cout << "Enter user name: ";
+			cin >> s;
+			bm.addUser(s);
+			break;
+		case 6:
+			cout << "Enter user name: ";
+			cin >> s;
+			bm.deleteUser(s);
 			break;
 		}
 	}
 	
-	cout << endl;
+	cout << "====================================" << endl;
 	cout << "-------- Library System End --------" << endl;
 	cout << "====================================" << endl;
-
-	return 0;
 }

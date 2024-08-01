@@ -8,11 +8,10 @@
 using namespace std;
 
 class BookManage {
-	
+	vector<Book> books;
 	vector<Book*> books_searched;
 	vector<Person*> user_list;
 public:
-	vector<Book> books; //디버깅 때문에 옮김
 	BookManage();
 	~BookManage();
 	bool canBorrow(Book* b);
@@ -22,9 +21,15 @@ public:
 	int searchByWriter(const char* writer);
 	int searchByIsbn(const char* isbn);
 	void Borrow(int idx_b, int idx_u);
+
+	void makeBackupFile(const char* file_directory);
+	void loadBackupFile(const char* file_directory);
+	void printAll();
+	void printOne(int idx);
+
+	// user 관련 내용 
 	int findUserIdx(const char* s);
-	void saveBookFile(const char* file_directory);
-	void loadBookFile(const char* file_directory);
-	void printAllBooks();
+	void addUser(const char* s);
+	void deleteUser(const char* s);
 };
 #endif

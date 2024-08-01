@@ -12,6 +12,7 @@ class Person {
 	Book* borrowBooks[2];
 public:
 	Person();
+	Person(const char* s);
 	char* getName();
 	int getId();
 	bool checkCanBorrow();
