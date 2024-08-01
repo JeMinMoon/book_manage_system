@@ -33,6 +33,7 @@ int main() {
 		cout << "7. Print All Books" << endl;
 		cout << "8. Save Books On File" << endl;
 		cout << "9. Load Books From File" << endl;
+		cout << "10. Return Book" << endl;
 		cout << "Select Menu: ";
 		cin >> menu;
 		if (menu == 0) break;
@@ -99,6 +100,17 @@ int main() {
 			break;
 		case 9:
 			bm.loadBookFile(book_file_directory);
+			break;
+		case 10:
+			cout << "Enter book name: ";
+			cin >> n;
+			idx_b = bm.searchByName(n);
+			cout << "Enter user name: ";
+			cin >> s;
+			idx_u = bm.findUserIdx(s);
+			if (idx_b != -1) {
+				bm.returnBook(idx_b, idx_u);
+			}
 			break;
 		}
 	}
