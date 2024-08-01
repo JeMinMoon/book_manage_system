@@ -58,7 +58,6 @@ int BookManage::searchByIsbn(string isbn) {
 	return -1; // 못 찾은 경우
 }
 
-<<<<<<< HEAD
 void BookManage::makeBackupFile(const char* file_directory) {
 	try {
 		FILE* fp = NULL;
@@ -109,21 +108,10 @@ void BookManage::printAll() {
 }
 
 void BookManage::Borrow(int index) {
-	if (canBorrow(&books[index]) == 1) { // ???? ?? ??? ???
-		cout << "today date: 08/01" << endl;
-		cout << "return due date: 08/15" << endl;
-=======
-void BookManage::Borrow(int index) {
 	if (canBorrow(books[index]) == 1) { // 빌릴 수 있는 상황
 		cout << "today date: 08/01" << endl;
 		cout << "return due date: 08/15" << endl; 
->>>>>>> 18bae7f26500659c6e667a0d66e48d03ba560d74
 	}
 	else {
 		cout << "cannot borrow" << endl;
 	}
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 18bae7f26500659c6e667a0d66e48d03ba560d74
