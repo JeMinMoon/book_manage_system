@@ -30,6 +30,9 @@ int main() {
 		cout << "4. Rent Book" << endl;
 		cout << "5. Add User" << endl;
 		cout << "6. Delete User" << endl;
+		cout << "7. Print All Books" << endl;
+		cout << "8. Save Books On File" << endl;
+		cout << "9. Load Books From File" << endl;
 		cout << "Select Menu: ";
 		cin >> menu;
 		if (menu == 0) break;
@@ -87,6 +90,15 @@ int main() {
 			cout << "Enter user name: ";
 			cin >> s;
 			bm.deleteUser(s);
+			break;
+		case 7:
+			bm.printAllBooks();
+			break;
+		case 8:
+			bm.saveBookFile(book_file_directory);
+			break;
+		case 9:
+			bm.loadBookFile(book_file_directory);
 			break;
 		}
 	}
