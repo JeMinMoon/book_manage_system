@@ -4,8 +4,10 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+
 class BookManage {
 	vector<Book*> books;
+	vector<Book*> books_searched;
 public:
 	BookManage();
 	~BookManage();
@@ -15,5 +17,6 @@ public:
 	int searchByName(string name); // books 벡터의 인덱스를 리턴하도록 구현
 	int searchByWriter(string writer);
 	int searchByIsbn(string isbn);
+	void Borrow(int index);
 };
 #endif

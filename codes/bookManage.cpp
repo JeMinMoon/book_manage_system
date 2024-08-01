@@ -40,7 +40,7 @@ int BookManage::searchByName(string name) {
 		int n;
 		cout << "select number: ";
 		cin >> n;
-		return n;
+		return searchByIsbn(books_searched[n]->getIsbn()); // 여기 뭔가 안 이쁨...
 	}
 }
 
@@ -59,4 +59,14 @@ int BookManage::searchByIsbn(string isbn) {
 		}
 	}
 	return -1; // 못 찾은 경우
+}
+
+void BookManage::Borrow(int index) {
+	if (canBorrow(books[index]) == 1) { // 빌릴 수 있는 상황
+		cout << "today date: 08/01" << endl;
+		cout << "return due date: 08/15" << endl; 
+	}
+	else {
+		cout << "cannot borrow" << endl;
+	}
 }
