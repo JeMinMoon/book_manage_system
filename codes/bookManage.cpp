@@ -2,9 +2,7 @@
 
 BookManage::BookManage() {}
 BookManage::~BookManage() {
-	for (auto& i : books) {
-		delete i;
-	}
+	delete[] &books;
 }
 
 bool BookManage::canBorrow(Book* b) {
@@ -12,11 +10,10 @@ bool BookManage::canBorrow(Book* b) {
 }
 
 void BookManage::addBook(string name, string writer, string isbn) {
-	books.push_back(new Book(name, writer, isbn));
+	books.push_back(*(new Book(name, writer, isbn)));
 }
 
 void BookManage::deleteBook(int index) {
-	delete books[index];
 	books.erase(books.begin() + index);
 }
 
@@ -24,11 +21,11 @@ int BookManage::searchByName(string name) {
 	cout << "start searching... " << endl;
 	books_searched.clear();
 	for (int i = 0; i < books.size(); i++) {
-		if (books[i]->getName() == name) {
+		if (books[i].getName() == name) {
 			cout << books_searched.size() << endl;
-			cout << "bookname: " << books[i]->getName() << endl;
-			cout << "writer: " << books[i]->getWriter() << endl;
-			books_searched.push_back(books[i]);		// 찾은 책들을 books_searched 벡터에 넣음 
+			cout << "bookname: " << books[i].getName() << endl;
+			cout << "writer: " << books[i].getWriter() << endl;
+			books_searched.push_back(&books[i]);		// 찾은 책들을 books_searched 벡터에 넣음 
 		}
 	}
 
@@ -46,7 +43,7 @@ int BookManage::searchByName(string name) {
 
 int BookManage::searchByWriter(string writer) {
 	for (int i = 0; i < books.size(); i++) {
-		if (books[i]->getWriter() == writer) {
+		if (books[i].getWriter() == writer) {
 			return i;
 		}
 	}
@@ -54,19 +51,79 @@ int BookManage::searchByWriter(string writer) {
 }
 int BookManage::searchByIsbn(string isbn) {
 	for (int i = 0; i < books.size(); i++) {
-		if (books[i]->getIsbn() == isbn) {
+		if (books[i].getIsbn() == isbn) {
 			return i;
 		}
 	}
 	return -1; // 못 찾은 경우
 }
 
+<<<<<<< HEAD
+void BookManage::makeBackupFile(const char* file_directory) {
+	try {
+		FILE* fp = NULL;
+		fopen_s(&fp, file_directory, "w");
+		if (fp == NULL) {
+			throw "파일 오픈 실패\n";
+			fclose(fp);
+		}
+
+		fwrite(&books, sizeof(Book), books.size(), fp);
+
+		fclose(fp);
+	}
+	catch (const char* s) {
+		cout << s;
+	}
+}
+
+void BookManage::loadBackupFile(const char* file_directory) {
+	try {
+		FILE* fp = NULL;
+		fopen_s(&fp, file_directory, "r");
+		if (fp == NULL) {
+			throw "파일 오픈 실패\n";
+			fclose(fp);
+		}
+
+		fread(&books, sizeof(Book), books.size(), fp);
+
+		fclose(fp);
+	}
+	catch (const char* s) {
+		cout << s;
+	}
+}
+
+void BookManage::printAll() {
+	for (auto& i : books) {
+		cout << "도서명: " << i.getName() << "저자: " << i.getWriter() << "ISBN: " << i.getIsbn();
+		if (i.getState()) {
+			cout << "대출 가능 여부: O";
+		}
+		else {
+			cout << "대출 가능 여부: X";
+		}
+		cout << "대출일: " << i.getborrowData() << "반납예정일: " << i.getreturnDate() << '\n';
+	}
+}
+
+void BookManage::Borrow(int index) {
+	if (canBorrow(&books[index]) == 1) { // ???? ?? ??? ???
+		cout << "today date: 08/01" << endl;
+		cout << "return due date: 08/15" << endl;
+=======
 void BookManage::Borrow(int index) {
 	if (canBorrow(books[index]) == 1) { // 빌릴 수 있는 상황
 		cout << "today date: 08/01" << endl;
 		cout << "return due date: 08/15" << endl; 
+>>>>>>> 18bae7f26500659c6e667a0d66e48d03ba560d74
 	}
 	else {
 		cout << "cannot borrow" << endl;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 18bae7f26500659c6e667a0d66e48d03ba560d74
