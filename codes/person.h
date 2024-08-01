@@ -11,8 +11,11 @@ class Person {
 	int borrowCount;	 // max = 2
 	Book* borrowBooks[2];
 public:
+	Person();
 	string getName();
 	int getId();
+	bool checkCanBorrow();
+	void Borrow(Book* b);
 };
 
 #endif
