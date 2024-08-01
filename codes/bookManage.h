@@ -20,7 +20,10 @@ public:
 	int searchByName(const char* name); // books 벡터의 인덱스를 리턴하도록 구현
 	int searchByWriter(const char* writer);
 	int searchByIsbn(const char* isbn);
+
+	// 대출 및 반납 
 	void Borrow(int idx_b, int idx_u);
+	void returnBook(int idx_b, int idx_u);
 
 	void saveBookFile(const char* file_directory);
 	void loadBookFile(const char* file_directory);

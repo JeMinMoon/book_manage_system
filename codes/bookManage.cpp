@@ -162,3 +162,12 @@ void BookManage::printOne(int idx) {
 	}
 	cout << "대출일: " << books[idx].getborrowData() << " / 반납예정일: " << books[idx].getreturnDate() << '\n';
 }
+
+void BookManage::returnBook(int idx_b, int idx_u) {
+	// 대출 상태 변경 
+	books[idx_b].stateToggle();
+	// 대출일, 반납일, 빌린사람 내용 삭제 
+	books[idx_b].returnBook();
+	// 사용자의 빌린 책 권수랑 빌린 책 목록 변경 
+	user_list[idx_u]->returnBook();
+}

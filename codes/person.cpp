@@ -30,3 +30,8 @@ void Person::Borrow(Book* b) {
 	borrowBooks[borrowCount] = b;
 	borrowCount++;
 }
+
+void Person::returnBook() {
+	borrowCount--;
+	borrowBooks[borrowCount] = NULL;
+}

@@ -24,6 +24,11 @@ void Book::stateToggle() {
 }
 void Book::borrow(Person* p) {
 	borrower = p;
-	borrowDate = 0;
+	borrowDate = 801;
 	returnDate = 815;
+}
+void Book::returnBook() {
+	borrower = NULL;
+	borrowDate = 0;
+	returnDate = 0;
 }

@@ -17,6 +17,7 @@ public:
 	int getId();
 	bool checkCanBorrow();
 	void Borrow(Book* b);
+	void returnBook();
 };
 
 #endif

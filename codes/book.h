@@ -24,6 +24,7 @@ public :
 	int getreturnDate();
 	void stateToggle();			// toggle state
 	void borrow(Person* p);
+	void returnBook();
 };
 
 #endif
