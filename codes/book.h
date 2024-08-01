@@ -11,6 +11,8 @@ class Book {
 	int	borrowDate;				// 책 대출일, 4자리 월일 형식으로 표기, 없을시 0으로 표기 
 	int returnDate;				// 책 반납일, 4자리 월일 형식으로 표기, 없을시 0으로 표기 
 public :
+	Book() {};
+	Book(string name, string writer, string isbn);
 	int getState();
 	string getName();
 	string getWriter();

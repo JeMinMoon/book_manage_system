@@ -2,6 +2,11 @@
 using namespace std;
 #include "book.h"
 
+Book::Book(string name, string writer, string isbn) {
+	this->name = name;
+	this->writer = writer;
+	this->isbn = isbn;
+}
 int Book::getState() { return state; }
 string Book::getName() { return name; }
 string Book::getWriter() { return writer; }
