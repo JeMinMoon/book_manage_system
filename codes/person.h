@@ -4,6 +4,7 @@
 using namespace std;
 #include "book.h"
 
+class Book;
 class Person {
 	string name;
 	int	id;

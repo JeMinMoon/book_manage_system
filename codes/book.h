@@ -2,6 +2,7 @@
 #define _BOOK_H
 #include "person.h"
 
+class Person;
 class Book {
 	int state;					// 0: not borrowed yet, 1: already borrowed
 	string name;				// bookname
