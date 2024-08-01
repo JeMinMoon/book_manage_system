@@ -2,7 +2,7 @@
 
 BookManage::BookManage() {}
 BookManage::~BookManage() {
-	delete[] &books;
+	delete[] & books;
 }
 
 bool BookManage::canBorrow(Book* b) {
@@ -107,11 +107,30 @@ void BookManage::printAll() {
 	}
 }
 
-void BookManage::Borrow(int index) {
-	if (canBorrow(books[index]) == 1) { // 빌릴 수 있는 상황
-		cout << "today date: 08/01" << endl;
-		cout << "return due date: 08/15" << endl; 
+void BookManage::Borrow(int idx_b, int idx_u) {
+	if (canBorrow(&books[idx_b]) == 0) { // 책은 있어 
+		// 사람도 있어?
+		if (user_list[idx_u]->checkCanBorrow() == 1) { // ㅇㅇ 있어 
+			cout << "today date: 08/01" << endl;
+			cout << "return due date: 08/15" << endl;
+			// 대출 상태 변경 
+			books[idx_b].stateToggle();
+			// 대출일, 반납일, 빌린사람 추가해야하는데 함수가 없음 (수정중)
+			// 사용자의 빌린 책 권수랑 빌린 책 목록 변경
+			user_list[idx_u]->Borrow(&books[idx_b]);
+		}
 	}
-	else {
+	else { // 책이 없어
 		cout << "cannot borrow" << endl;
 	}
+}
+
+int BookManage::findUserIdx(string s) {
+	for (int i = 0; i < user_list.size(); i++) {
+		if (user_list[i]->getName() == s) {
+			return i;
+		}
+	}
+	cout << "cannot find user" << endl;
+	return -1;
+}

@@ -3,24 +3,25 @@
 #include "book.h"
 #include <iostream>
 #include <vector>
-#include <stdio.h>
 using namespace std;
 
 class BookManage {
 	vector<Book> books;
 	vector<Book*> books_searched;
+	vector<Person*> user_list;
 public:
 	BookManage();
 	~BookManage();
 	bool canBorrow(Book* b);
 	void addBook(string n, string w, string i);
 	void deleteBook(int index);
-	int searchByName(string name); // books ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	int searchByName(string name); // books º¤ÅÍÀÇ ÀÎµ¦½º¸¦ ¸®ÅÏÇÏµµ·Ï ±¸Çö
 	int searchByWriter(string writer);
 	int searchByIsbn(string isbn);
+	void Borrow(int idx_b, int idx_u);
+	int findUserIdx(string s);
 	void makeBackupFile(const char* file_directory);
 	void loadBackupFile(const char* file_directory);
 	void printAll();
-	void Borrow(int index);
 };
 #endif
