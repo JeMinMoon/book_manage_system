@@ -9,6 +9,9 @@ class Person {
 	int	id;
 	int borrowCount;	 // √÷¥Î 2±«
 	Book* borrowBooks[2];
+public:
+	string getName();
+	int getId();
 };
 
 #endif
