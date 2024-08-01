@@ -7,7 +7,7 @@ using namespace std;
 class Person {
 	string name;
 	int	id;
-	int borrowCount;	 // √÷¥Î 2±«
+	int borrowCount;	 // max = 2
 	Book* borrowBooks[2];
 public:
 	string getName();
