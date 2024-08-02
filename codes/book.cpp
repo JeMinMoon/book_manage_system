@@ -32,3 +32,14 @@ void Book::returnBook() {
 	borrowDate = 0;
 	returnDate = 0;
 }
+
+void Book::printBook() {
+	cout << "도서명: " << name << " / 저자: " << writer << " / ISBN: " << isbn << endl;
+	if (!state) {
+		cout << "대출 가능 여부: O" << endl;
+	}
+	else {
+		cout << "대출 가능 여부: X" << endl;
+		cout << "대출일: " << borrowDate << " / 반납예정일: " << returnDate << '\n';
+	}
+}

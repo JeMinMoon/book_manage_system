@@ -25,6 +25,7 @@ public :
 	void stateToggle();			// toggle state
 	void borrow(Person* p);
 	void returnBook();
+	void printBook();
 };
 
 #endif

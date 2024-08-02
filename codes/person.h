@@ -15,7 +15,9 @@ public:
 	Person(const char* s, int size);
 	char* getName();
 	int getId();
-	bool checkCanBorrow();
+	int getborrowCount();
+	Book** getborrowBooks();
+	bool checkCanBorrow(int flag); // flag == 1 이면 출력문 출력, == 0 이면 출력문 없이 T/F 만 판단
 	void Borrow(Book* b);
 	void returnBook();
 };

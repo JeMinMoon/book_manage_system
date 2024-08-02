@@ -40,6 +40,7 @@ int main() {
 		cout << "11. Save Users On File" << endl;
 		cout << "12. Load Users From File" << endl;
 		cout << "13. Print All Users" << endl;
+		cout << "14. Print Overdue Users" << endl;
 		cout << "Select Menu: ";
 		cin >> menu;
 		if (menu == 0) break;
@@ -84,7 +85,9 @@ int main() {
 			idx_b = bm.searchByName(n);
 			cout << "Enter user name: ";
 			cin >> s;
-			idx_u = bm.findUserIdx(s);
+			cout << "Enter user id: ";
+			cin >> idx;
+			idx_u = bm.findUserIdx(s, idx);
 			if (idx_b != -1) {
 				bm.Borrow(idx_b, idx_u);
 			}
@@ -95,7 +98,9 @@ int main() {
 			idx_b = bm.searchByName(n);
 			cout << "Enter user name: ";
 			cin >> s;
-			idx_u = bm.findUserIdx(s);
+			cout << "Enter user id: ";
+			cin >> idx;
+			idx_u = bm.findUserIdx(s, idx);
 			if (idx_b != -1) {
 				bm.returnBook(idx_b, idx_u);
 			}
@@ -108,7 +113,9 @@ int main() {
 		case 7:
 			cout << "Enter user name: ";
 			cin >> s;
-			bm.deleteUser(s);
+			cout << "Enter user id: ";
+			cin >> idx;
+			bm.deleteUser(s, idx);
 			break;
 		case 8:
 			bm.printAllBooks();
@@ -128,10 +135,14 @@ int main() {
 		case 13:
 			bm.PrintAllUsers();
 			break;
+		case 14:
+			bm.printUserOverdue();
 		}
 	}
-	
-	cout << "====================================" << endl;
-	cout << "-------- Library System End --------" << endl;
-	cout << "====================================" << endl;
+
+	cout << "------------------------------------" << endl;
+	cout << endl;
+	cout << "         Library System End         " << endl;
+	cout << endl;
+	cout << "------------------------------------" << endl;
 }

@@ -140,7 +140,7 @@ void BookManage::loadPersonFile(const char* file_directory) {
 void BookManage::printAllBooks() {
 	for (auto& i : books) {
 		cout << "도서명:" << i.getName() << " 저자:" << i.getWriter() << " ISBN:" << i.getIsbn();
-		if (i.getState()) {
+		if (!i.getState()) {
 			cout << " 대출 가능 여부:O";
 		}
 		else {
@@ -149,18 +149,27 @@ void BookManage::printAllBooks() {
 		cout << " 대출일:" << i.getborrowData() << " 반납예정일:" << i.getreturnDate() << '\n';
 	}
 }
-void BookManage::PrintAllUsers() {
 
+void BookManage::PrintAllUsers() {
 	for (auto& i : user_list) {
 		cout << "회원명:" << i.getName() << " Id:" << i.getId() << endl;
-
+		cout << "빌린 책 총 " << i.getborrowCount() << "권" << endl;
+		if (i.getborrowCount() != 0) {
+			cout << "빌린 책 목록" << endl;
+			Book** blist = i.getborrowBooks();
+			for (int j = 0; j < i.getborrowCount(); j++) {
+				cout << j << ">>" << endl;
+				blist[j]->printBook();
+			}
+		}
+		cout << endl;
 	}
 }
 
 void BookManage::Borrow(int idx_b, int idx_u) {
 	if (books[idx_b].getState() == 0) { // 책은 있어 
 		// 사람도 있어?
-		if (user_list[idx_u].checkCanBorrow() == 1) { // ㅇㅇ 있어 
+		if (user_list[idx_u].checkCanBorrow(1) == 1) { // ㅇㅇ 있어 
 			cout << "today date: 08/01" << endl;
 			cout << "return due date: 08/15" << endl;
 			// 대출 상태 변경 
@@ -176,9 +185,9 @@ void BookManage::Borrow(int idx_b, int idx_u) {
 	}
 }
 
-int BookManage::findUserIdx(const char* s) {
+int BookManage::findUserIdx(const char* s, int id) {
 	for (int i = 0; i < user_list.size(); i++) {
-		if (!strcmp(user_list[i].getName(),s)) {
+		if ((!strcmp(user_list[i].getName(), s)) && (id == user_list[i].getId())) {
 			return i;
 		}
 	}
@@ -186,29 +195,24 @@ int BookManage::findUserIdx(const char* s) {
 	return -1;
 }
 
+
 void BookManage::addUser(const char* s) {
 	user_list.push_back(Person(s, user_list.size()));
 	cout << "회원가입이 완료되었습니다. " << endl;
 	cout << "당신의 id는 " << user_list[user_list.size() - 1].getId() << endl;
 }
 
-void BookManage::deleteUser(const char* s) {
-	int idx = findUserIdx(s);
+void BookManage::deleteUser(const char* s, int id) {
+	int idx = findUserIdx(s, id);
 	if (idx != -1) {
 		user_list.erase(user_list.begin() + idx);
 		cout << "delete success" << endl;
 	}
 }
 
+
 void BookManage::printOne(int idx) {
-	cout << "도서명: " << books[idx].getName() << " / 저자: " << books[idx].getWriter() << " / ISBN: " << books[idx].getIsbn() << endl;
-	if (books[idx].getState()) {
-		cout << "대출 가능 여부: O" << endl;
-	}
-	else {
-		cout << "대출 가능 여부: X" << endl;
-	}
-	cout << "대출일: " << books[idx].getborrowData() << " / 반납예정일: " << books[idx].getreturnDate() << '\n';
+	books[idx].printBook();
 }
 
 void BookManage::returnBook(int idx_b, int idx_u) {
@@ -218,4 +222,23 @@ void BookManage::returnBook(int idx_b, int idx_u) {
 	books[idx_b].returnBook();
 	// 사용자의 빌린 책 권수랑 빌린 책 목록 변경 
 	user_list[idx_u].returnBook();
+}
+
+// 연체자 리스트 출력 
+void BookManage::printUserOverdue() {
+	bool check = false;
+	for (auto& i : user_list) {
+		if (!i.checkCanBorrow(0)) {
+			Book** blist = i.getborrowBooks();
+			for (int j = 0; j < i.getborrowCount(); j++) {
+				if (blist[j]->getreturnDate() < 801) {
+					cout << endl;
+					cout << j << ">>" << endl;
+					blist[j]->printBook();
+					check = true;
+				}
+			}
+			if (check == true) cout << "회원명:" << i.getName() << " Id:" << i.getId() << endl;
+		}
+	}
 }
