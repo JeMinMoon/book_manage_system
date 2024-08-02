@@ -27,6 +27,8 @@ public:
 
 	void saveBookFile(const char* file_directory);
 	void loadBookFile(const char* file_directory);
+	void savePersonFile(const char* file_directory);
+	void loadPersonFile(const char* file_directory);
 	void printAllBooks();
 	void printOne(int idx);
 	void PrintAllUsers();

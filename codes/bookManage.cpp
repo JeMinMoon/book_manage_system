@@ -160,15 +160,15 @@ void BookManage::PrintAllUsers() {
 void BookManage::Borrow(int idx_b, int idx_u) {
 	if (books[idx_b].getState() == 0) { // 책은 있어 
 		// 사람도 있어?
-		if (user_list[idx_u]->checkCanBorrow() == 1) { // ㅇㅇ 있어 
+		if (user_list[idx_u].checkCanBorrow() == 1) { // ㅇㅇ 있어 
 			cout << "today date: 08/01" << endl;
 			cout << "return due date: 08/15" << endl;
 			// 대출 상태 변경 
 			books[idx_b].stateToggle();
 			// 대출일, 반납일, 빌린사람 추가해야하는데 함수가 없음
-			books[idx_b].borrow(user_list[idx_u]);
+			books[idx_b].borrow(&user_list[idx_u]);
 			// 사용자의 빌린 책 권수랑 빌린 책 목록 변경
-			user_list[idx_u]->Borrow(&books[idx_b]);
+			user_list[idx_u].Borrow(&books[idx_b]);
 		}
 	}
 	else { // 책이 없어
@@ -187,7 +187,7 @@ int BookManage::findUserIdx(const char* s) {
 }
 
 void BookManage::addUser(const char* s) {
-	user_list.push_back(new Person(s, user_list.size()));
+	user_list.push_back(Person(s, user_list.size()));
 	cout << "회원가입이 완료되었습니다. " << endl;
 	cout << "당신의 id는 " << user_list[user_list.size() - 1].getId() << endl;
 }

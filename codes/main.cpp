@@ -6,6 +6,7 @@
 
 int main() {
 	const char* book_file_directory = "book_file.txt";
+	const char* user_file_directory = "user_file.txt";
 	int menu;
 	BookManage bm;
 	char n[30];
@@ -36,6 +37,9 @@ int main() {
 		cout << "8. Print All Books" << endl;
 		cout << "9. Save Books On File" << endl;
 		cout << "10. Load Books From File" << endl;
+		cout << "11. Save Users On File" << endl;
+		cout << "12. Load Users From File" << endl;
+		cout << "13. Print All Users" << endl;
 		cout << "Select Menu: ";
 		cin >> menu;
 		if (menu == 0) break;
@@ -114,6 +118,15 @@ int main() {
 			break;
 		case 10:
 			bm.loadBookFile(book_file_directory);
+			break;
+		case 11:
+			bm.savePersonFile(user_file_directory);
+			break;
+		case 12:
+			bm.loadPersonFile(user_file_directory);
+			break;
+		case 13:
+			bm.PrintAllUsers();
 			break;
 		}
 	}
