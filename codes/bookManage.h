@@ -10,7 +10,7 @@ using namespace std;
 class BookManage {
 	vector<Book> books;
 	vector<Book*> books_searched;
-	vector<Person*> user_list;
+	vector<Person> user_list;
 public:
 	BookManage();
 	~BookManage();
@@ -29,6 +29,7 @@ public:
 	void loadBookFile(const char* file_directory);
 	void printAllBooks();
 	void printOne(int idx);
+	void PrintAllUsers();
 
 	// user 관련 내용 
 	int findUserIdx(const char* s);

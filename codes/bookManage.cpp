@@ -98,6 +98,44 @@ void BookManage::loadBookFile(const char* file_directory) {
 	}
 	cout << "로드 완료\n";
 }
+void BookManage::savePersonFile(const char* file_directory) {
+	try {
+		ofstream ofs(file_directory, ios::binary);
+		if (!ofs) {
+			throw "파일 오픈 실패\n";
+		}
+
+		for (auto i : user_list) {
+			ofs.write(reinterpret_cast<const char*>(&i), sizeof(Person));
+		}
+
+
+		ofs.close();
+	}
+	catch (const char* s) {
+		cout << s;
+	}
+	cout << "저장 완료\n";
+}
+void BookManage::loadPersonFile(const char* file_directory) {
+	user_list.clear();
+	try {
+		ifstream ifs(file_directory, ios::binary);
+		if (!ifs) {
+			throw "파일 오픈 실패\n";
+		}
+		Person temp;
+		while (ifs.read(reinterpret_cast<char*>(&temp), sizeof(Person))) {
+			user_list.push_back(temp);
+		}
+
+		ifs.close();
+	}
+	catch (const char* s) {
+		cout << s;
+	}
+	cout << "로드 완료\n";
+}
 
 void BookManage::printAllBooks() {
 	for (auto& i : books) {
@@ -109,6 +147,13 @@ void BookManage::printAllBooks() {
 			cout << " 대출 가능 여부:X";
 		}
 		cout << " 대출일:" << i.getborrowData() << " 반납예정일:" << i.getreturnDate() << '\n';
+	}
+}
+void BookManage::PrintAllUsers() {
+
+	for (auto& i : user_list) {
+		cout << "회원명:" << i.getName() << " Id:" << i.getId() << endl;
+
 	}
 }
 
@@ -133,7 +178,7 @@ void BookManage::Borrow(int idx_b, int idx_u) {
 
 int BookManage::findUserIdx(const char* s) {
 	for (int i = 0; i < user_list.size(); i++) {
-		if (!strcmp(user_list[i]->getName(),s)) {
+		if (!strcmp(user_list[i].getName(),s)) {
 			return i;
 		}
 	}
@@ -144,7 +189,7 @@ int BookManage::findUserIdx(const char* s) {
 void BookManage::addUser(const char* s) {
 	user_list.push_back(new Person(s, user_list.size()));
 	cout << "회원가입이 완료되었습니다. " << endl;
-	cout << "당신의 id는 " << user_list[user_list.size() - 1]->getId() << endl;
+	cout << "당신의 id는 " << user_list[user_list.size() - 1].getId() << endl;
 }
 
 void BookManage::deleteUser(const char* s) {
@@ -172,5 +217,5 @@ void BookManage::returnBook(int idx_b, int idx_u) {
 	// 대출일, 반납일, 빌린사람 내용 삭제 
 	books[idx_b].returnBook();
 	// 사용자의 빌린 책 권수랑 빌린 책 목록 변경 
-	user_list[idx_u]->returnBook();
+	user_list[idx_u].returnBook();
 }
