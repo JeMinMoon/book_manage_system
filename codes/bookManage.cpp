@@ -6,7 +6,7 @@ BookManage::~BookManage() {
 }
 
 bool BookManage::canBorrow(Book* b) {
-	return !b->getState(); // can borrow = 1 / c
+	return !b->getState(); // can borrow = 1 
 }
 
 void BookManage::addBook(const char* name, const char* writer, const char* isbn) {
@@ -15,6 +15,7 @@ void BookManage::addBook(const char* name, const char* writer, const char* isbn)
 
 void BookManage::deleteBook(int index) {
 	books.erase(books.begin() + index);
+	cout << "Delete Success" << endl;
 }
 
 int BookManage::searchByName(const char* name) {
@@ -24,7 +25,7 @@ int BookManage::searchByName(const char* name) {
 	for (int i = 0; i < books.size(); i++) {
 		if (!strcmp(books[i].getName(), name)) {
 			cout << books_searched.size() << ". bookname: " << books[i].getName() << endl;
-			cout << "writer: " << books[i].getWriter() << endl;
+			cout << "writer: " << books[i].getWriter() << endl << endl;
 			books_searched.push_back(&books[i]);		// 찾은 책들을 books_searched 벡터에 넣음 
 		}
 	}
@@ -141,7 +142,9 @@ int BookManage::findUserIdx(const char* s) {
 }
 
 void BookManage::addUser(const char* s) {
-	user_list.push_back(new Person(s));
+	user_list.push_back(new Person(s, user_list.size()));
+	cout << "회원가입이 완료되었습니다. " << endl;
+	cout << "당신의 id는 " << user_list[user_list.size() - 1]->getId() << endl;
 }
 
 void BookManage::deleteUser(const char* s) {

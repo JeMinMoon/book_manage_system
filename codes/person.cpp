@@ -4,7 +4,7 @@ using namespace std;
 #include "person.h"
 
 Person::Person() { borrowCount = 0; }
-Person::Person(const char* s) { borrowCount = 0; strcpy(name, s); }
+Person::Person(const char* s, int size) { borrowCount = 0; strcpy(name, s); id = size; }
 char* Person::getName() { return name; }
 int Person::getId() { return id; }
 bool Person::checkCanBorrow() {
