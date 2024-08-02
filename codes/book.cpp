@@ -23,11 +23,13 @@ void Book::stateToggle() {
 	state = (state == 0) ? 1 : 0;
 }
 void Book::borrow(Person* p) {
+	state = (state == 0) ? 1 : 0;
 	borrower = p;
 	borrowDate = 801;
 	returnDate = 815;
 }
 void Book::returnBook() {
+	state = (state == 0) ? 1 : 0;
 	borrower = NULL;
 	borrowDate = 0;
 	returnDate = 0;

@@ -172,9 +172,7 @@ void BookManage::Borrow(int idx_b, int idx_u) {
 		if (user_list[idx_u].checkCanBorrow(1) == 1) { // ㅇㅇ 있어 
 			cout << "today date: 08/01" << endl;
 			cout << "return due date: 08/15" << endl;
-			// 대출 상태 변경 
-			books[idx_b].stateToggle();
-			// 대출일, 반납일, 빌린사람 추가해야하는데 함수가 없음
+			// 대출 상태 토글 및 대출일, 반납일, 빌린사람 추가
 			books[idx_b].borrow(&user_list[idx_u]);
 			// 사용자의 빌린 책 권수랑 빌린 책 목록 변경
 			user_list[idx_u].Borrow(&books[idx_b]);
@@ -183,6 +181,22 @@ void BookManage::Borrow(int idx_b, int idx_u) {
 	else { // 책이 없어
 		cout << "cannot borrow" << endl;
 	}
+}
+
+void BookManage::returnBook(int idx_b, int idx_u) {
+	Book** blist = user_list[idx_u].getborrowBooks();
+	for (int i = 0; i < user_list[idx_u].getborrowCount(); i++) {
+		if (books[idx_b].getIsbn() == blist[i]->getIsbn()) {
+			// 대출 상태 토글 및 대출일, 반납일, 빌린사람 내용 삭제 
+			books[idx_b].returnBook();
+			// 사용자의 빌린 책 권수랑 빌린 책 목록 변경 
+			user_list[idx_u].returnBook();
+			cout << "Return Success" << endl;
+			return;
+		}
+	}
+	cout << "Return failed. Try again. " << endl;
+	return;
 }
 
 int BookManage::findUserIdx(const char* s, int id) {
@@ -210,18 +224,8 @@ void BookManage::deleteUser(const char* s, int id) {
 	}
 }
 
-
 void BookManage::printOne(int idx) {
 	books[idx].printBook();
-}
-
-void BookManage::returnBook(int idx_b, int idx_u) {
-	// 대출 상태 변경 
-	books[idx_b].stateToggle();
-	// 대출일, 반납일, 빌린사람 내용 삭제 
-	books[idx_b].returnBook();
-	// 사용자의 빌린 책 권수랑 빌린 책 목록 변경 
-	user_list[idx_u].returnBook();
 }
 
 // 연체자 리스트 출력 
