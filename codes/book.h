@@ -2,6 +2,10 @@
 #define _BOOK_H
 
 #include "person.h"
+#include <chrono>
+#include <iomanip>
+#include "date.h"
+
 
 class Person;
 class Book {
@@ -10,8 +14,8 @@ class Book {
 	char writer[30];
 	char isbn[20];					// isbn
 	Person* borrower;			// info of borrower
-	int	borrowDate;				// 책 대출일, 4자리 월일 형식으로 표기, 없을시 0으로 표기 
-	int returnDate;				// 책 반납일, 4자리 월일 형식으로 표기, 없을시 0으로 표기 
+	tm borrowDate;				// 책 대출일, 4자리 월일 형식으로 표기, 없을시 0으로 표기 
+	tm returnDate;				// 책 반납일, 4자리 월일 형식으로 표기, 없을시 0으로 표기 
 public :
 	Book();
 	Book(const char* name, const char* writer, const char* isbn);
@@ -20,8 +24,8 @@ public :
 	char* getWriter();
 	char* getIsbn();
 	Person* getBorrower();		// get info about borrower
-	int getborrowData();
-	int getreturnDate();
+	tm* getborrowDate();
+	tm* getreturnDate();
 	void stateToggle();			// toggle state
 	void borrow(Person* p);
 	void returnBook();

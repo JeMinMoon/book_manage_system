@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "bookManage.h"
 
 BookManage::BookManage() {}
@@ -146,7 +147,7 @@ void BookManage::printAllBooks() {
 		else {
 			cout << " 대출 가능 여부:X";
 		}
-		cout << " 대출일:" << i.getborrowData() << " 반납예정일:" << i.getreturnDate() << '\n';
+		cout << " 대출일:" << put_time(i.getborrowDate(), "%Y-%m-%d") << " 반납예정일:" << put_time(i.getreturnDate(), "%Y-%m-%d") << '\n';
 	}
 }
 
@@ -234,8 +235,11 @@ void BookManage::printUserOverdue() {
 	for (auto& i : user_list) {
 		if (!i.checkCanBorrow(0)) {
 			Book** blist = i.getborrowBooks();
+			auto now = chrono::system_clock::now();
+			time_t now_time_t = chrono::system_clock::to_time_t(now);
+			tm now_tm = *localtime(&now_time_t);
 			for (int j = 0; j < i.getborrowCount(); j++) {
-				if (blist[j]->getreturnDate() < 801) {
+				if (Date::timeOver(*(blist[j]->getreturnDate()), now_tm)) {
 					cout << endl;
 					cout << j << ">>" << endl;
 					blist[j]->printBook();
