@@ -18,9 +18,14 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
     // mdiArea 생성
     mdiArea = new QMdiArea(this);
-    connect(mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow*)), SLOT(setFontWidget()));
     setCentralWidget(mdiArea);
     mdiArea->setViewMode(QMdiArea::TabbedView);     // 새창열기 모드 말고 탭으로 열기 모드 사용
+    mdiArea->addSubWindow(bookSubWin);
+    bookSubWin->setWindowTitle("Book");
+    mdiArea->addSubWindow(userSubWin);
+    userSubWin->setWindowTitle("User");
+    mdiArea->addSubWindow(rentSubWin);
+    rentSubWin->setWindowTitle("Rent/Return");
 
     // menubar 생성
     QMenuBar* menuBar = new QMenuBar(this);

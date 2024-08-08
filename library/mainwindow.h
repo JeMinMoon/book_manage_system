@@ -6,15 +6,22 @@
 #include <QFontComboBox>
 #include <QDoubleSpinBox>
 #include <QHash>
+#include <QMdiArea>
+#include <QMdiSubWindow>
+
 class QAction;
 class QMdiArea;
 class QTextEdit;
+class QMdiSubWindow;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
     QMdiArea* mdiArea;
     QHash<QAction*, QWidget*> windowHash;
+    QMdiSubWindow* bookSubWin = new QMdiSubWindow;
+    QMdiSubWindow* userSubWin = new QMdiSubWindow;
+    QMdiSubWindow* rentSubWin = new QMdiSubWindow;
 
 public:
     MainWindow(QWidget *parent = nullptr);
