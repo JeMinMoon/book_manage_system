@@ -115,6 +115,7 @@ void MainWindow::openFile(){
     QByteArray byteArray = filename.toUtf8();
     bm->loadBookFile(byteArray.constData());
     bm->printAllBooks();
+    bookWin->printBookList(bm->books);
 }
 
 void MainWindow::saveFile(){
@@ -168,8 +169,9 @@ void MainWindow::addB(){
     qDebug()<< bwriter;
     qDebug() << bISBN;
     bm->addBook(bname.toUtf8().constData(), bwriter.toUtf8().constData(), bISBN.toUtf8().constData());
-    QMessageBox::question(this, "-", "책 추가가 완료되었습니다", QMessageBox::Ok);
-    bookWin->clear();
+    //QMessageBox::question(this, "-", "책 추가가 완료되었습니다", QMessageBox::Ok);
+    //bookWin->clear();
+    bookWin->printAddedBook(bm->books);
 }
 
 void MainWindow::delB(){

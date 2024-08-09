@@ -9,10 +9,11 @@
 using namespace std;
 
 class BookManage {
-	vector<Book> books;
+
 	vector<Book*> books_searched;
 	vector<Person> user_list;
 public:
+    vector<Book> books;
 	BookManage();
 	~BookManage();
 	bool canBorrow(Book* b);
