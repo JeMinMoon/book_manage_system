@@ -15,6 +15,8 @@
 #include <QFile>
 #include <QHBoxLayout>
 #include <QTableWidget>
+#include <QHeaderView>
+
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
     // mdiArea 생성
@@ -27,28 +29,23 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     userSubWin->setWindowTitle("User");
     mdiArea->addSubWindow(rentSubWin);
     rentSubWin->setWindowTitle("Rent/Return");
+    windowVector.push_back(bookSubWin);
+    windowVector.push_back(userSubWin);
+    windowVector.push_back(rentSubWin);
 
     // bookSubWin
-    QWidget* bookWidget = new QWidget(); // mdiArea 에 바로 layout 추가 안된다
-    bookSubWin->setWidget(bookWidget);
-    QHBoxLayout* bookWin = new QHBoxLayout();
-    bookWin->setContentsMargins(0,0,0,0);
+    QHBoxLayout* bookWinLayout = new QHBoxLayout();
+    bookWinLayout->setContentsMargins(0,0,0,0);
 
     QTableWidget* bookList = new QTableWidget();
-    bookWin->addWidget(bookList);
-    QWidget* bookMenuWidget = new QWidget();
-
-    QVBoxLayout* bookMenuLayout = new QVBoxLayout();
-    // bookMenuLayout
-    // QPushButton* test1 = new QPushButton();
-    // QPushButton* test2 = new QPushButton();
-    // QPushButton* test3 = new QPushButton();
-    // bookMenuLayout->addWidget(test1);
-    // bookMenuLayout->addWidget(test2);
-    // bookMenuLayout->addWidget(test3);
-    // bookWin->addWidget(bookLabelMenu);
-
-    bookWidget->setLayout(bookWin);
+    bookWinLayout->addWidget(bookList);
+    bookList = new QTableWidget(0, 2);
+    QStringList labels;
+    labels << tr("File Name") << tr("Size");
+    bookList->setHorizontalHeaderLabels(labels);
+    bookList->verticalHeader()->hide();
+    bookList->setShowGrid(false);
+    bookWinLayout->addWidget(bookList);
 
     // menubar 생성
     QMenuBar* menuBar = new QMenuBar(this);
@@ -117,7 +114,10 @@ void MainWindow::saveFile(){
 
 void MainWindow::quit() {}
 
-void MainWindow::addBook() {}
+void MainWindow::addBook() {
+    mdiArea->setActiveSubWindow(bookSubWin);
+}
+
 void MainWindow::deleteBook(){}
 void MainWindow::searchBook(){}
 void MainWindow::rentBook(){}

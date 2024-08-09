@@ -8,6 +8,7 @@
 #include <QHash>
 #include <QMdiArea>
 #include <QMdiSubWindow>
+#include <QVector>
 
 class QAction;
 class QMdiArea;
@@ -18,8 +19,10 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     QMdiArea* mdiArea;
+    QVector<QWidget*> windowVector;
     QHash<QAction*, QWidget*> windowHash;
-    QWidget* bookSubWin = new QWidget;
+    //QWidget* bookSubWin = new QWidget;
+    QMdiSubWindow* bookSubWin = new QMdiSubWindow;
     QWidget* userSubWin = new QWidget;
     QWidget* rentSubWin = new QWidget;
 
