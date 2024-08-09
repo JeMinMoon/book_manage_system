@@ -51,5 +51,9 @@ public slots:
     void searchUser();
     //void printOverdueUser();
 
+    void addB();
+    void delB();
+    void searchB();
+
 };
 #endif // MAINWINDOW_H

@@ -12,18 +12,14 @@
 #include <QPushButton>
 class bookwidget: public QWidget {
 private:
-    QLineEdit* bLineEdit[2];
+    QLineEdit* bLineEdit[3];
     QWidget* button;
+public:
     QPushButton* add;
     QPushButton* del;
     QPushButton* search;
-public:
     bookwidget();
-public slots:
     QString getText(int);
-    void addB();
-    void delB();
-    void searchB();
 };
 
 

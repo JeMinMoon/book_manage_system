@@ -30,9 +30,6 @@ bookwidget::bookwidget() {
     add = new QPushButton("add");
     del = new QPushButton("delete");
     search = new QPushButton("search");
-    connect(add, SIGNAL(clicked(bool)), this, SLOT(add()));
-    connect(del, SIGNAL(clicked(bool)), this, SLOT(del()));
-    connect(search, SIGNAL(clicked(bool)), this, SLOT(search()));
     buttonlayout->addWidget(add);
     buttonlayout->addWidget(del);
     buttonlayout->addWidget(search);
@@ -48,22 +45,3 @@ QString bookwidget::getText(int i){
     return bLineEdit[i]->text();
 }
 
-void bookwidget::addB(){
-    /*
-    QString bname = bookWin->getText(0);
-    QString bwriter = bookWin->getText(1);
-    QString bISBN = bookWin->getText(2);
-    qDebug() << bname;
-    qDebug()<< bwriter;
-    qDebug() << bISBN;
-*/
-    //bm->addBook(bname.toUtf8().constData(), bwriter.toUtf8().constData(), bISBN.toUtf8().constData());
-}
-
-void bookwidget::delB(){
-   // bm->deleteBook();
-}
-
-void bookwidget::searchB(){
-
-}

@@ -34,10 +34,9 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
     // bookSubWin 생성
     bookWin = new bookwidget();
-    //QAction* addBook = bookWin->add
-    connect(add, SIGNAL(clicked(bool)), this, SLOT(addBook()));
-    connect(del, SIGNAL(clicked(bool)), this, SLOT(delBook()));
-    connect(search, SIGNAL(clicked(bool)), this, SLOT(searchBook()));
+    connect(bookWin->add, SIGNAL(clicked(bool)), this, SLOT(addB()));
+    connect(bookWin->del, SIGNAL(clicked(bool)), this, SLOT(delB()));
+    connect(bookWin->search, SIGNAL(clicked(bool)), this, SLOT(searchB()));
     bookSubWin->setWidget(bookWin);
 
     // userSubWin 생성
@@ -157,5 +156,26 @@ void MainWindow::deleteUser(){
 void MainWindow::searchUser(){
     mdiArea->setActiveSubWindow(userSubWin);
 }
+
+void MainWindow::addB(){
+    QString bname = bookWin->getText(0);
+    QString bwriter = bookWin->getText(1);
+    QString bISBN = bookWin->getText(2);
+    qDebug() << bname;
+    qDebug()<< bwriter;
+    qDebug() << bISBN;
+
+    bm->addBook(bname.toUtf8().constData(), bwriter.toUtf8().constData(), bISBN.toUtf8().constData());
+}
+
+void MainWindow::delB(){
+    QString bname = bookWin->getText(0);
+    // bm->deleteBook(bm->searchByName());
+}
+
+void MainWindow::searchB(){
+
+}
+
 
 MainWindow::~MainWindow() {}
