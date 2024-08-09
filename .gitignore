@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,qtcreator,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,qtcreator,c++
 
+#build ignore
+library/library/
+library/build/
+
 ### C++ ###
 # Prerequisites
 *.d

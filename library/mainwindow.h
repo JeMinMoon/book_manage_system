@@ -19,9 +19,9 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     QMdiArea* mdiArea;
     QHash<QAction*, QWidget*> windowHash;
-    QMdiSubWindow* bookSubWin = new QMdiSubWindow;
-    QMdiSubWindow* userSubWin = new QMdiSubWindow;
-    QMdiSubWindow* rentSubWin = new QMdiSubWindow;
+    QWidget* bookSubWin = new QWidget;
+    QWidget* userSubWin = new QWidget;
+    QWidget* rentSubWin = new QWidget;
 
 public:
     MainWindow(QWidget *parent = nullptr);
