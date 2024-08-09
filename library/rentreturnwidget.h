@@ -8,9 +8,13 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QPushButton>
+#include <QListWidget>
 
 class rentReturnWidget:public QWidget
 {
+private:
+    QListWidget* bookList;
+    QListWidget* userList;
 public:
     rentReturnWidget();
 };

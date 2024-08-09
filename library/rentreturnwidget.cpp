@@ -14,8 +14,14 @@ rentReturnWidget::rentReturnWidget() {
     QComboBox* rentReturnBox = new QComboBox(frame1_2);
     rentReturnBox->addItem("대출");
     rentReturnBox->addItem("반납");
-    QPushButton* submitButton = new QPushButton(frame1_2);
+    QPushButton* submitButton = new QPushButton("확인",frame1_2);
+    bookList = new QListWidget(frame2);
+    userList = new QListWidget(frame2);
+    QHBoxLayout* frame2_Layout = new QHBoxLayout(frame2);
 
+    frame2_Layout->addWidget(bookList);
+    frame2_Layout->addWidget(userList);
+    frame2->setLayout(frame2_Layout);
     frame1_2_Layout->addWidget(rentReturnBox);
     frame1_2_Layout->addWidget(submitButton);
     frame1_2->setLayout(frame1_2_Layout);
