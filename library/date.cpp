@@ -28,3 +28,12 @@ bool Date::timeOver(tm r_date, tm now) {
 		return true;
 	return false;
 }
+
+QString Date::tmToQString(std::tm* tm, const char* format) {
+    char buffer[100];
+    if (std::strftime(buffer, sizeof(buffer), format, tm)) {
+        return QString(buffer);
+    } else {
+        return QString();
+    }
+}

@@ -106,11 +106,22 @@ QAction* MainWindow::makeAction(QString icon, QString text, QString shortcut, QS
 }
 
 void MainWindow::openFile(){
+    QString filename = QFileDialog::getOpenFileName(this,"Select file to open",
+                                                    QDir::home().dirName(),"Text File(*.txt *.html *.c *.cpp *.h)");
+    if(!filename.length())return;
 
+    QByteArray byteArray = filename.toUtf8();
+    bm->loadBookFile(byteArray.constData());
+    bm->printAllBooks();
 }
 
 void MainWindow::saveFile(){
+    QString filename = QFileDialog::getOpenFileName(this,"Select file to open",
+                                                    QDir::home().dirName(),"Text File(*.txt *.html *.c *.cpp *.h)");
+    if(!filename.length())return;
 
+    QByteArray byteArray = filename.toUtf8();
+    bm->saveBookFile(byteArray.constData());
 }
 
 void MainWindow::quit() {}

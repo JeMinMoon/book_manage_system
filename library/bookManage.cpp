@@ -1,5 +1,6 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include "bookManage.h"
+#include <QDebug>
 
 BookManage::BookManage() {}
 BookManage::~BookManage() {
@@ -139,16 +140,17 @@ void BookManage::loadPersonFile(const char* file_directory) {
 }
 
 void BookManage::printAllBooks() {
-	for (auto& i : books) {
-		cout << "도서명:" << i.getName() << " 저자:" << i.getWriter() << " ISBN:" << i.getIsbn();
-		if (!i.getState()) {
-			cout << " 대출 가능 여부:O";
-		}
-		else {
-			cout << " 대출 가능 여부:X";
-		}
-		cout << " 대출일:" << put_time(i.getborrowDate(), "%Y-%m-%d") << " 반납예정일:" << put_time(i.getreturnDate(), "%Y-%m-%d") << '\n';
-	}
+    for (auto& i : books) {
+        qDebug() << "도서명:" << i.getName() << " 저자:" << i.getWriter() << " ISBN:" << i.getIsbn();
+        if (!i.getState()) {
+            qDebug() << " 대출 가능 여부:O";
+        }
+        else {
+            qDebug() << " 대출 가능 여부:X";
+        }
+        //cout << " 대출일:" << put_time(i.getborrowDate(), "%Y-%m-%d") << " 반납예정일:" << put_time(i.getreturnDate(), "%Y-%m-%d") << '\n';
+        qDebug() << " 대출일:" << Date::tmToQString(i.getborrowDate(), "%Y-%m-%d") << " 반납예정일:" << Date::tmToQString(i.getreturnDate(), "%Y-%m-%d") << '\n';
+    }
 }
 
 void BookManage::PrintAllUsers() {

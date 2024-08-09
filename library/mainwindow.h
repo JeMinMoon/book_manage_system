@@ -12,6 +12,8 @@
 #include <QVector>
 #include "bookManage.h"
 #include "bookwidget.h"
+#include <QFileDialog>
+#include <QByteArray>
 
 class QAction;
 class QMdiArea;

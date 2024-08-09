@@ -1,4 +1,5 @@
 ﻿#include <chrono>
+#include <QString>
 
 using namespace std;
 class Date {
@@ -12,4 +13,5 @@ public:
 
 	tm getAfterTwoWeek();
 	Date();
+    static QString tmToQString(std::tm* tm, const char* format);
 };
