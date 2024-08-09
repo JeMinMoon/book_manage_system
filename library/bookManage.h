@@ -37,7 +37,7 @@ public:
 
 	// user 관련 내용 
 	int findUserIdx(const char* s, int id);
-	void addUser(const char* s);
+    int addUser(const char* s);
 	void deleteUser(const char* s, int id);
 	void savePersonFile(const char* file_directory);
 	void loadPersonFile(const char* file_directory);

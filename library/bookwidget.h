@@ -20,6 +20,7 @@ public:
     QPushButton* search;
     bookwidget();
     QString getText(int);
+    void clear();
 };
 
 

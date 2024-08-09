@@ -21,8 +21,8 @@ void BookManage::deleteBook(int index) {
 }
 
 int BookManage::searchByName(const char* name) {
-	cout << "start searching... " << endl;
-	cout << endl;
+    qDebug() << "start searching... ";
+
 	books_searched.clear();
 	for (int i = 0; i < books.size(); i++) {
 		if (!strcmp(books[i].getName(), name)) {
@@ -213,10 +213,9 @@ int BookManage::findUserIdx(const char* s, int id) {
 }
 
 
-void BookManage::addUser(const char* s) {
+int BookManage::addUser(const char* s) {
 	user_list.push_back(Person(s, user_list.size()));
-	cout << "회원가입이 완료되었습니다. " << endl;
-	cout << "당신의 id는 " << user_list[user_list.size() - 1].getId() << endl;
+    return user_list[user_list.size() - 1].getId();
 }
 
 void BookManage::deleteUser(const char* s, int id) {

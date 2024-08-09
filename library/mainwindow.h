@@ -12,6 +12,7 @@
 #include <QVector>
 #include "bookManage.h"
 #include "bookwidget.h"
+#include "userwidget.h"
 #include <QFileDialog>
 #include <QByteArray>
 
@@ -28,6 +29,7 @@ class MainWindow : public QMainWindow
     QMdiSubWindow* userSubWin = new QMdiSubWindow;
     QMdiSubWindow* rentSubWin = new QMdiSubWindow;
     bookwidget* bookWin;
+    userwidget* userWin;
     BookManage* bm = new BookManage();
 
 public:
@@ -43,17 +45,22 @@ public slots:
     void addBook();
     void deleteBook();
     void searchBook();
-    void rentBook();
-    void returnBook();
 
     void addUser();
     void deleteUser();
     void searchUser();
     //void printOverdueUser();
 
+    void rentBook();
+    void returnBook();
+
     void addB();
     void delB();
     void searchB();
+
+    void addU();
+    void delU();
+    void searchU();
 
 };
 #endif // MAINWINDOW_H

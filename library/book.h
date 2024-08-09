@@ -30,6 +30,7 @@ public :
 	void borrow(Person* p);
 	void returnBook();
 	void printBook();
+
 };
 
 #endif

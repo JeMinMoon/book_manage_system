@@ -1,8 +1,8 @@
 #include "userwidget.h"
 #include <QFormLayout>
 #include <QLineEdit>
+#include <QStringList>
 userwidget::userwidget(){
-
     QHBoxLayout* userWinLayout = new QHBoxLayout();
     userWinLayout->setContentsMargins(0,0,0,0);
 
@@ -19,15 +19,34 @@ userwidget::userwidget(){
     // layout 우측에 들어가는 메뉴
     QGroupBox* userMenu = new QGroupBox("search book");
     QStringList userLabels;
-    userLabels << "제목" << "저자";
-    QLineEdit* uLineEdit[2];
+    userLabels << "이름" << "ID";
     QFormLayout* uFormLayout = new QFormLayout;
     for (int i =0;i<2; i++) {
         uLineEdit[i] = new QLineEdit;
         uFormLayout->addRow(userLabels.at(i), uLineEdit[i]);
     }
+    button = new QWidget();
+    QHBoxLayout* buttonlayout = new QHBoxLayout();
+    add = new QPushButton("add");
+    del = new QPushButton("delete");
+    search = new QPushButton("search");
+    buttonlayout->addWidget(add);
+    buttonlayout->addWidget(del);
+    buttonlayout->addWidget(search);
+    button->setLayout(buttonlayout);
+    uFormLayout->addRow(button);
     userMenu->setLayout(uFormLayout);
     userWinLayout->addWidget(userMenu);
 
     setLayout(userWinLayout);
+}
+
+QString userwidget::getText(int i){
+    return uLineEdit[i]->text();
+}
+
+void userwidget::clear(){
+    for (int i =0;i<2;i++){
+        uLineEdit[i]->clear();
+    }
 }

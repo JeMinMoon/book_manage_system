@@ -45,3 +45,9 @@ QString bookwidget::getText(int i){
     return bLineEdit[i]->text();
 }
 
+void bookwidget::clear(){
+    for (int i =0; i<3;i++){
+        bLineEdit[i]->clear();
+    }
+}
+
