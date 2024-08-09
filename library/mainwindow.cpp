@@ -1,5 +1,6 @@
 #include "mainwindow.h"
-
+#include "userwidget.h"
+#include "bookwidget.h"
 #include <QApplication>
 #include <QTextEdit>
 #include <QMenuBar>
@@ -16,6 +17,7 @@
 #include <QHBoxLayout>
 #include <QTableWidget>
 #include <QHeaderView>
+#include <QGroupBox>
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
@@ -29,23 +31,18 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     userSubWin->setWindowTitle("User");
     mdiArea->addSubWindow(rentSubWin);
     rentSubWin->setWindowTitle("Rent/Return");
-    windowVector.push_back(bookSubWin);
-    windowVector.push_back(userSubWin);
-    windowVector.push_back(rentSubWin);
 
-    // bookSubWin
-    QHBoxLayout* bookWinLayout = new QHBoxLayout();
-    bookWinLayout->setContentsMargins(0,0,0,0);
+    // bookSubWin 생성
+    QWidget* bookWin = new bookwidget();
+    bookSubWin->setWidget(bookWin);
 
-    QTableWidget* bookList = new QTableWidget();
-    bookWinLayout->addWidget(bookList);
-    bookList = new QTableWidget(0, 2);
-    QStringList labels;
-    labels << tr("File Name") << tr("Size");
-    bookList->setHorizontalHeaderLabels(labels);
-    bookList->verticalHeader()->hide();
-    bookList->setShowGrid(false);
-    bookWinLayout->addWidget(bookList);
+    // userSubWin 생성
+    QWidget* userWin = new userwidget();
+    userSubWin->setWidget(userWin);
+
+    // rentSubWin 생성
+    QWidget* rentWin = new rentReturnWidget();
+    rentSubWin->setWidget(rentWin);
 
     // menubar 생성
     QMenuBar* menuBar = new QMenuBar(this);
@@ -118,13 +115,27 @@ void MainWindow::addBook() {
     mdiArea->setActiveSubWindow(bookSubWin);
 }
 
-void MainWindow::deleteBook(){}
-void MainWindow::searchBook(){}
-void MainWindow::rentBook(){}
-void MainWindow::returnBook(){}
+void MainWindow::deleteBook(){
+    mdiArea->setActiveSubWindow(bookSubWin);
+}
+void MainWindow::searchBook(){
+    mdiArea->setActiveSubWindow(bookSubWin);
+}
+void MainWindow::rentBook(){
+    mdiArea->setActiveSubWindow(rentSubWin);
+}
+void MainWindow::returnBook(){
+    mdiArea->setActiveSubWindow(rentSubWin);
+}
 
-void MainWindow::addUser(){}
-void MainWindow::deleteUser(){}
-void MainWindow::searchUser(){}
+void MainWindow::addUser(){
+    mdiArea->setActiveSubWindow(userSubWin);
+}
+void MainWindow::deleteUser(){
+    mdiArea->setActiveSubWindow(userSubWin);
+}
+void MainWindow::searchUser(){
+    mdiArea->setActiveSubWindow(userSubWin);
+}
 
 MainWindow::~MainWindow() {}

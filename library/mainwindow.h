@@ -6,6 +6,7 @@
 #include <QFontComboBox>
 #include <QDoubleSpinBox>
 #include <QHash>
+#include "rentreturnwidget.h"
 #include <QMdiArea>
 #include <QMdiSubWindow>
 #include <QVector>
@@ -19,12 +20,9 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     QMdiArea* mdiArea;
-    QVector<QWidget*> windowVector;
-    QHash<QAction*, QWidget*> windowHash;
-    //QWidget* bookSubWin = new QWidget;
     QMdiSubWindow* bookSubWin = new QMdiSubWindow;
-    QWidget* userSubWin = new QWidget;
-    QWidget* rentSubWin = new QWidget;
+    QMdiSubWindow* userSubWin = new QMdiSubWindow;
+    QMdiSubWindow* rentSubWin = new QMdiSubWindow;
 
 public:
     MainWindow(QWidget *parent = nullptr);
