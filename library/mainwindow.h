@@ -11,6 +11,7 @@
 #include <QMdiSubWindow>
 #include <QVector>
 #include "bookManage.h"
+#include "bookwidget.h"
 
 class QAction;
 class QMdiArea;
@@ -24,6 +25,7 @@ class MainWindow : public QMainWindow
     QMdiSubWindow* bookSubWin = new QMdiSubWindow;
     QMdiSubWindow* userSubWin = new QMdiSubWindow;
     QMdiSubWindow* rentSubWin = new QMdiSubWindow;
+    bookwidget* bookWin;
     BookManage* bm = new BookManage();
 
 public:

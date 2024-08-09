@@ -33,7 +33,11 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     rentSubWin->setWindowTitle("Rent/Return");
 
     // bookSubWin 생성
-    QWidget* bookWin = new bookwidget();
+    bookWin = new bookwidget();
+    //QAction* addBook = bookWin->add
+    connect(add, SIGNAL(clicked(bool)), this, SLOT(addBook()));
+    connect(del, SIGNAL(clicked(bool)), this, SLOT(delBook()));
+    connect(search, SIGNAL(clicked(bool)), this, SLOT(searchBook()));
     bookSubWin->setWidget(bookWin);
 
     // userSubWin 생성
@@ -118,12 +122,15 @@ void MainWindow::addBook() {
 void MainWindow::deleteBook(){
     mdiArea->setActiveSubWindow(bookSubWin);
 }
+
 void MainWindow::searchBook(){
     mdiArea->setActiveSubWindow(bookSubWin);
 }
+
 void MainWindow::rentBook(){
     mdiArea->setActiveSubWindow(rentSubWin);
 }
+
 void MainWindow::returnBook(){
     mdiArea->setActiveSubWindow(rentSubWin);
 }
@@ -131,9 +138,11 @@ void MainWindow::returnBook(){
 void MainWindow::addUser(){
     mdiArea->setActiveSubWindow(userSubWin);
 }
+
 void MainWindow::deleteUser(){
     mdiArea->setActiveSubWindow(userSubWin);
 }
+
 void MainWindow::searchUser(){
     mdiArea->setActiveSubWindow(userSubWin);
 }

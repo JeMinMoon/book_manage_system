@@ -8,10 +8,22 @@
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QGroupBox>
-
-class bookwidget: public QWidget{
+#include <QLineEdit>
+#include <QPushButton>
+class bookwidget: public QWidget {
+private:
+    QLineEdit* bLineEdit[2];
+    QWidget* button;
+    QPushButton* add;
+    QPushButton* del;
+    QPushButton* search;
 public:
     bookwidget();
+public slots:
+    QString getText(int);
+    void addB();
+    void delB();
+    void searchB();
 };
 
 
