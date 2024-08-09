@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "library::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-library-Debug-65ed96462cdb06f6dd62.json",
+					"jsonFile" : "target-library-Debug-a6235248d4e956e13519.json",
 					"name" : "library",
 					"projectIndex" : 0
 				},
@@ -68,8 +68,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/DREAM09/Desktop/\ud669\uc740\uc9c0/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug",
-		"source" : "C:/Users/DREAM09/Desktop/\ud669\uc740\uc9c0/library/library"
+		"build" : "C:/Users/DREAM10/Desktop/github/test1/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug",
+		"source" : "C:/Users/DREAM10/Desktop/github/test1/library/library"
 	},
 	"version" : 
 	{

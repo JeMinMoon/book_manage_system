@@ -39,7 +39,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/DREAM09/Desktop/\ud669\uc740\uc9c0/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug"
+			"value" : "c:/Users/DREAM10/Desktop/github/test1/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -415,7 +415,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/DREAM09/Desktop/\ud669\uc740\uc9c0/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/DREAM10/Desktop/github/test1/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -511,7 +511,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/DREAM09/Desktop/\ud669\uc740\uc9c0/library/library"
+			"value" : "C:/Users/DREAM10/Desktop/github/test1/library/library"
 		},
 		{
 			"name" : "CMAKE_INSTALL_BINDIR",
@@ -979,7 +979,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/DREAM09/Desktop/\ud669\uc740\uc9c0/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug/.qtc/package-manager/auto-setup.cmake"
+			"value" : "C:/Users/DREAM10/Desktop/github/test1/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug/.qtc/package-manager/auto-setup.cmake"
 		},
 		{
 			"name" : "CMAKE_PROJECT_NAME",
@@ -6063,7 +6063,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/DREAM09/Desktop/\ud669\uc740\uc9c0/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug"
+			"value" : "C:/Users/DREAM10/Desktop/github/test1/library/library/build/Desktop_Qt_6_5_3_MSVC2019_64bit-Debug"
 		},
 		{
 			"name" : "library_IS_TOP_LEVEL",
@@ -6087,7 +6087,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/DREAM09/Desktop/\ud669\uc740\uc9c0/library/library"
+			"value" : "C:/Users/DREAM10/Desktop/github/test1/library/library"
 		}
 	],
 	"kind" : "cache",
