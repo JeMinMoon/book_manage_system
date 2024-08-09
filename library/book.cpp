@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "book.h"
 using namespace std;
@@ -25,8 +25,8 @@ void Book::stateToggle() {
 void Book::borrow(Person* p) {
 	state = (state == 0) ? 1 : 0;
 	Date d;
-	tm now = d.getNow_time_t(); // ÇöÀç ³¯Â¥ ÀúÀå
-	tm after_two_weeks = d.getAfterTwoWeek(); // ÇöÀç ³¯Â¥ + 2ÁÖ
+	tm now = d.getNow_time_t(); // í˜„ìž¬ ë‚ ì§œ ì €ìž¥
+	tm after_two_weeks = d.getAfterTwoWeek(); // í˜„ìž¬ ë‚ ì§œ + 2ì£¼
 	borrower = p;
 	borrowDate = now;
 	returnDate = after_two_weeks;
@@ -39,12 +39,12 @@ void Book::returnBook() {
 }
 
 void Book::printBook() {
-	cout << "µµ¼­¸í: " << name << " / ÀúÀÚ: " << writer << " / ISBN: " << isbn << endl;
+	cout << "ë„ì„œëª…: " << name << " / ì €ìž: " << writer << " / ISBN: " << isbn << endl;
 	if (!state) {
-		cout << "´ëÃâ °¡´É ¿©ºÎ: O" << endl;
+		cout << "ëŒ€ì¶œ ê°€ëŠ¥ ì—¬ë¶€: O" << endl;
 	}
 	else {
-		cout << "´ëÃâ °¡´É ¿©ºÎ: X" << endl;
-		cout << "´ëÃâÀÏ: " << put_time(getborrowDate(), "%Y-%m-%d") << " / ¹Ý³³¿¹Á¤ÀÏ: " << put_time(&returnDate, "%Y-%m-%d") << '\n';
+		cout << "ëŒ€ì¶œ ê°€ëŠ¥ ì—¬ë¶€: X" << endl;
+		cout << "ëŒ€ì¶œì¼: " << put_time(getborrowDate(), "%Y-%m-%d") << " / ë°˜ë‚©ì˜ˆì •ì¼: " << put_time(&returnDate, "%Y-%m-%d") << '\n';
 	}
 }

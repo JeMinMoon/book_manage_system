@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include "bookManage.h"
 
 BookManage::BookManage() {}
@@ -27,7 +27,7 @@ int BookManage::searchByName(const char* name) {
 		if (!strcmp(books[i].getName(), name)) {
 			cout << books_searched.size() << ". bookname: " << books[i].getName() << endl;
 			cout << "writer: " << books[i].getWriter() << endl << endl;
-			books_searched.push_back(&books[i]);		// Ã£Àº Ã¥µéÀ» books_searched º¤ÅÍ¿¡ ³ÖÀ½ 
+			books_searched.push_back(&books[i]);		// ì°¾ì€ ì±…ë“¤ì„ books_searched ë²¡í„°ì— ë„£ìŒ 
 		}
 	}
 
@@ -39,7 +39,7 @@ int BookManage::searchByName(const char* name) {
 		int n;
 		cout << "select number: ";
 		cin >> n;
-		return searchByIsbn(books_searched[n]->getIsbn()); // ¿©±â ¹º°¡ ¾È ÀÌ»İ...
+		return searchByIsbn(books_searched[n]->getIsbn()); // ì—¬ê¸° ë­”ê°€ ì•ˆ ì´ì¨...
 	}
 }
 
@@ -49,7 +49,7 @@ int BookManage::searchByWriter(const char* writer) {
 			return i;
 		}
 	}
-	return -1; // ¸ø Ã£Àº °æ¿ì
+	return -1; // ëª» ì°¾ì€ ê²½ìš°
 }
 int BookManage::searchByIsbn(const char* isbn) {
 	for (int i = 0; i < books.size(); i++) {
@@ -57,14 +57,14 @@ int BookManage::searchByIsbn(const char* isbn) {
 			return i;
 		}
 	}
-	return -1; // ¸ø Ã£Àº °æ¿ì
+	return -1; // ëª» ì°¾ì€ ê²½ìš°
 }
 
 void BookManage::saveBookFile(const char* file_directory) {
 	try {
 		ofstream ofs(file_directory, ios::binary);
 		if (!ofs) {
-			throw "ÆÄÀÏ ¿ÀÇÂ ½ÇÆĞ\n";
+			throw "íŒŒì¼ ì˜¤í”ˆ ì‹¤íŒ¨\n";
 		}
 
 		for (auto& i : books) {
@@ -77,7 +77,7 @@ void BookManage::saveBookFile(const char* file_directory) {
 	catch (const char* s) {
 		cout << s;
 	}
-	cout << "ÀúÀå ¿Ï·á\n";
+	cout << "ì €ì¥ ì™„ë£Œ\n";
 }
 
 void BookManage::loadBookFile(const char* file_directory) {
@@ -85,7 +85,7 @@ void BookManage::loadBookFile(const char* file_directory) {
 	try {
 		ifstream ifs(file_directory, ios::binary);
 		if (!ifs) {
-			throw "ÆÄÀÏ ¿ÀÇÂ ½ÇÆĞ\n";
+			throw "íŒŒì¼ ì˜¤í”ˆ ì‹¤íŒ¨\n";
 		}
 		Book temp;
 		while (ifs.read(reinterpret_cast<char*>(&temp), sizeof(Book))) {
@@ -97,13 +97,13 @@ void BookManage::loadBookFile(const char* file_directory) {
 	catch (const char* s) {
 		cout << s;
 	}
-	cout << "·Îµå ¿Ï·á\n";
+	cout << "ë¡œë“œ ì™„ë£Œ\n";
 }
 void BookManage::savePersonFile(const char* file_directory) {
 	try {
 		ofstream ofs(file_directory, ios::binary);
 		if (!ofs) {
-			throw "ÆÄÀÏ ¿ÀÇÂ ½ÇÆĞ\n";
+			throw "íŒŒì¼ ì˜¤í”ˆ ì‹¤íŒ¨\n";
 		}
 
 		for (auto i : user_list) {
@@ -116,14 +116,14 @@ void BookManage::savePersonFile(const char* file_directory) {
 	catch (const char* s) {
 		cout << s;
 	}
-	cout << "ÀúÀå ¿Ï·á\n";
+	cout << "ì €ì¥ ì™„ë£Œ\n";
 }
 void BookManage::loadPersonFile(const char* file_directory) {
 	user_list.clear();
 	try {
 		ifstream ifs(file_directory, ios::binary);
 		if (!ifs) {
-			throw "ÆÄÀÏ ¿ÀÇÂ ½ÇÆĞ\n";
+			throw "íŒŒì¼ ì˜¤í”ˆ ì‹¤íŒ¨\n";
 		}
 		Person temp;
 		while (ifs.read(reinterpret_cast<char*>(&temp), sizeof(Person))) {
@@ -135,28 +135,28 @@ void BookManage::loadPersonFile(const char* file_directory) {
 	catch (const char* s) {
 		cout << s;
 	}
-	cout << "·Îµå ¿Ï·á\n";
+	cout << "ë¡œë“œ ì™„ë£Œ\n";
 }
 
 void BookManage::printAllBooks() {
 	for (auto& i : books) {
-		cout << "µµ¼­¸í:" << i.getName() << " ÀúÀÚ:" << i.getWriter() << " ISBN:" << i.getIsbn();
+		cout << "ë„ì„œëª…:" << i.getName() << " ì €ì:" << i.getWriter() << " ISBN:" << i.getIsbn();
 		if (!i.getState()) {
-			cout << " ´ëÃâ °¡´É ¿©ºÎ:O";
+			cout << " ëŒ€ì¶œ ê°€ëŠ¥ ì—¬ë¶€:O";
 		}
 		else {
-			cout << " ´ëÃâ °¡´É ¿©ºÎ:X";
+			cout << " ëŒ€ì¶œ ê°€ëŠ¥ ì—¬ë¶€:X";
 		}
-		cout << " ´ëÃâÀÏ:" << put_time(i.getborrowDate(), "%Y-%m-%d") << " ¹İ³³¿¹Á¤ÀÏ:" << put_time(i.getreturnDate(), "%Y-%m-%d") << '\n';
+		cout << " ëŒ€ì¶œì¼:" << put_time(i.getborrowDate(), "%Y-%m-%d") << " ë°˜ë‚©ì˜ˆì •ì¼:" << put_time(i.getreturnDate(), "%Y-%m-%d") << '\n';
 	}
 }
 
 void BookManage::PrintAllUsers() {
 	for (auto& i : user_list) {
-		cout << "È¸¿ø¸í:" << i.getName() << " Id:" << i.getId() << endl;
-		cout << "ºô¸° Ã¥ ÃÑ " << i.getborrowCount() << "±Ç" << endl;
+		cout << "íšŒì›ëª…:" << i.getName() << " Id:" << i.getId() << endl;
+		cout << "ë¹Œë¦° ì±… ì´ " << i.getborrowCount() << "ê¶Œ" << endl;
 		if (i.getborrowCount() != 0) {
-			cout << "ºô¸° Ã¥ ¸ñ·Ï" << endl;
+			cout << "ë¹Œë¦° ì±… ëª©ë¡" << endl;
 			Book** blist = i.getborrowBooks();
 			for (int j = 0; j < i.getborrowCount(); j++) {
 				cout << j << ">>" << endl;
@@ -168,18 +168,18 @@ void BookManage::PrintAllUsers() {
 }
 
 void BookManage::Borrow(int idx_b, int idx_u) {
-	if (books[idx_b].getState() == 0) { // Ã¥Àº ÀÖ¾î 
-		// »ç¶÷µµ ÀÖ¾î?
-		if (user_list[idx_u].checkCanBorrow(1) == 1) { // ¤·¤· ÀÖ¾î 
+	if (books[idx_b].getState() == 0) { // ì±…ì€ ìˆì–´ 
+		// ì‚¬ëŒë„ ìˆì–´?
+		if (user_list[idx_u].checkCanBorrow(1) == 1) { // ã…‡ã…‡ ìˆì–´ 
 			cout << "today date: 08/01" << endl;
 			cout << "return due date: 08/15" << endl;
-			// ´ëÃâ »óÅÂ Åä±Û ¹× ´ëÃâÀÏ, ¹İ³³ÀÏ, ºô¸°»ç¶÷ Ãß°¡
+			// ëŒ€ì¶œ ìƒíƒœ í† ê¸€ ë° ëŒ€ì¶œì¼, ë°˜ë‚©ì¼, ë¹Œë¦°ì‚¬ëŒ ì¶”ê°€
 			books[idx_b].borrow(&user_list[idx_u]);
-			// »ç¿ëÀÚÀÇ ºô¸° Ã¥ ±Ç¼ö¶û ºô¸° Ã¥ ¸ñ·Ï º¯°æ
+			// ì‚¬ìš©ìì˜ ë¹Œë¦° ì±… ê¶Œìˆ˜ë‘ ë¹Œë¦° ì±… ëª©ë¡ ë³€ê²½
 			user_list[idx_u].Borrow(&books[idx_b]);
 		}
 	}
-	else { // Ã¥ÀÌ ¾ø¾î
+	else { // ì±…ì´ ì—†ì–´
 		cout << "cannot borrow" << endl;
 	}
 }
@@ -188,9 +188,9 @@ void BookManage::returnBook(int idx_b, int idx_u) {
 	Book** blist = user_list[idx_u].getborrowBooks();
 	for (int i = 0; i < user_list[idx_u].getborrowCount(); i++) {
 		if (books[idx_b].getIsbn() == blist[i]->getIsbn()) {
-			// ´ëÃâ »óÅÂ Åä±Û ¹× ´ëÃâÀÏ, ¹İ³³ÀÏ, ºô¸°»ç¶÷ ³»¿ë »èÁ¦ 
+			// ëŒ€ì¶œ ìƒíƒœ í† ê¸€ ë° ëŒ€ì¶œì¼, ë°˜ë‚©ì¼, ë¹Œë¦°ì‚¬ëŒ ë‚´ìš© ì‚­ì œ 
 			books[idx_b].returnBook();
-			// »ç¿ëÀÚÀÇ ºô¸° Ã¥ ±Ç¼ö¶û ºô¸° Ã¥ ¸ñ·Ï º¯°æ 
+			// ì‚¬ìš©ìì˜ ë¹Œë¦° ì±… ê¶Œìˆ˜ë‘ ë¹Œë¦° ì±… ëª©ë¡ ë³€ê²½ 
 			user_list[idx_u].returnBook();
 			cout << "Return Success" << endl;
 			return;
@@ -213,8 +213,8 @@ int BookManage::findUserIdx(const char* s, int id) {
 
 void BookManage::addUser(const char* s) {
 	user_list.push_back(Person(s, user_list.size()));
-	cout << "È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù. " << endl;
-	cout << "´ç½ÅÀÇ id´Â " << user_list[user_list.size() - 1].getId() << endl;
+	cout << "íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤. " << endl;
+	cout << "ë‹¹ì‹ ì˜ idëŠ” " << user_list[user_list.size() - 1].getId() << endl;
 }
 
 void BookManage::deleteUser(const char* s, int id) {
@@ -229,7 +229,7 @@ void BookManage::printOne(int idx) {
 	books[idx].printBook();
 }
 
-// ¿¬Ã¼ÀÚ ¸®½ºÆ® Ãâ·Â 
+// ì—°ì²´ì ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ 
 void BookManage::printUserOverdue() {
 	bool check = false;
 	for (auto& i : user_list) {
@@ -246,7 +246,7 @@ void BookManage::printUserOverdue() {
 					check = true;
 				}
 			}
-			if (check == true) cout << "È¸¿ø¸í:" << i.getName() << " Id:" << i.getId() << endl;
+			if (check == true) cout << "íšŒì›ëª…:" << i.getName() << " Id:" << i.getId() << endl;
 		}
 	}
 }

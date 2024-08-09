@@ -1,4 +1,4 @@
-#ifndef _BOOK_H
+ï»¿#ifndef _BOOK_H
 #define _BOOK_H
 
 #include "person.h"
@@ -14,8 +14,8 @@ class Book {
 	char writer[30];
 	char isbn[20];					// isbn
 	Person* borrower;			// info of borrower
-	tm borrowDate;				// Ã¥ ´ëÃâÀÏ, 4ÀÚ¸® ¿ùÀÏ Çü½ÄÀ¸·Î Ç¥±â, ¾øÀ»½Ã 0À¸·Î Ç¥±â 
-	tm returnDate;				// Ã¥ ¹İ³³ÀÏ, 4ÀÚ¸® ¿ùÀÏ Çü½ÄÀ¸·Î Ç¥±â, ¾øÀ»½Ã 0À¸·Î Ç¥±â 
+	tm borrowDate;				// ì±… ëŒ€ì¶œì¼, 4ìë¦¬ ì›”ì¼ í˜•ì‹ìœ¼ë¡œ í‘œê¸°, ì—†ì„ì‹œ 0ìœ¼ë¡œ í‘œê¸° 
+	tm returnDate;				// ì±… ë°˜ë‚©ì¼, 4ìë¦¬ ì›”ì¼ í˜•ì‹ìœ¼ë¡œ í‘œê¸°, ì—†ì„ì‹œ 0ìœ¼ë¡œ í‘œê¸° 
 public :
 	Book();
 	Book(const char* name, const char* writer, const char* isbn);

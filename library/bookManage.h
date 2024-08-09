@@ -1,4 +1,4 @@
-#ifndef _BOOKMANAGE_H
+ï»¿#ifndef _BOOKMANAGE_H
 #define _BOOKMANAGE_H
 #include "book.h"
 #include <iostream>
@@ -19,23 +19,23 @@ public:
 	void addBook(const char* n, const char* w, const char* i);
 	void deleteBook(int index);
 
-	// Ã¥ Ã£´Â ÇÔ¼öµé 
-	int searchByName(const char* name); // books º¤ÅÍÀÇ ÀÎµ¦½º¸¦ ¸®ÅÏÇÏµµ·Ï ±¸Çö
+	// ì±… ì°¾ëŠ” í•¨ìˆ˜ë“¤ 
+	int searchByName(const char* name); // books ë²¡í„°ì˜ ì¸ë±ìŠ¤ë¥¼ ë¦¬í„´í•˜ë„ë¡ êµ¬í˜„
 	int searchByWriter(const char* writer);
 	int searchByIsbn(const char* isbn);
 
-	// ´ëÃâ ¹× ¹İ³³ 
+	// ëŒ€ì¶œ ë° ë°˜ë‚© 
 	void Borrow(int idx_b, int idx_u);
 	void returnBook(int idx_b, int idx_u);
-	void printUserOverdue(); // ¿¬Ã¼ÀÚ ¸®½ºÆ® Ãâ·Â 
+	void printUserOverdue(); // ì—°ì²´ì ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ 
 
-	// Ã¥ db ÀÔÃâ·Â ÇÔ¼ö ¹× Ã¥ Á¤º¸ Ãâ·Â ÇÔ¼ö 
+	// ì±… db ì…ì¶œë ¥ í•¨ìˆ˜ ë° ì±… ì •ë³´ ì¶œë ¥ í•¨ìˆ˜ 
 	void saveBookFile(const char* file_directory);
 	void loadBookFile(const char* file_directory);
 	void printAllBooks();
 	void printOne(int idx);
 
-	// user °ü·Ã ³»¿ë 
+	// user ê´€ë ¨ ë‚´ìš© 
 	int findUserIdx(const char* s, int id);
 	void addUser(const char* s);
 	void deleteUser(const char* s, int id);

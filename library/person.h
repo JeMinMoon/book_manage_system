@@ -1,4 +1,4 @@
-#ifndef _PERSON_H
+ï»¿#ifndef _PERSON_H
 #define _PERSON_H
 #include <string>
 using namespace std;
@@ -17,7 +17,7 @@ public:
 	int getId();
 	int getborrowCount();
 	Book** getborrowBooks();
-	bool checkCanBorrow(int flag); // flag == 1 ÀÌ¸é Ãâ·Â¹® Ãâ·Â, == 0 ÀÌ¸é Ãâ·Â¹® ¾øÀÌ T/F ¸¸ ÆÇ´Ü
+	bool checkCanBorrow(int flag); // flag == 1 ì´ë©´ ì¶œë ¥ë¬¸ ì¶œë ¥, == 0 ì´ë©´ ì¶œë ¥ë¬¸ ì—†ì´ T/F ë§Œ íŒë‹¨
 	void Borrow(Book* b);
 	void returnBook();
 };

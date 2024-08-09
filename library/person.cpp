@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
 #include "person.h"
@@ -13,24 +13,24 @@ Book** Person::getborrowBooks() { return borrowBooks; }
 
 
 bool Person::checkCanBorrow(int flag) {
-	if (borrowCount < 2) { // ´ëÃâ ±Ç¼ö 2±Ç ¹Ì¸¸ÀÌ¶ó ´ëÃâ °¡´É 
-		// ¿¬Ã¼µÇÁö ¾Ê¾Ò´ÂÁö È®ÀÎ 
+	if (borrowCount < 2) { // ëŒ€ì¶œ ê¶Œìˆ˜ 2ê¶Œ ë¯¸ë§Œì´ë¼ ëŒ€ì¶œ ê°€ëŠ¥ 
+		// ì—°ì²´ë˜ì§€ ì•Šì•˜ëŠ”ì§€ í™•ì¸ 
 		auto now = chrono::system_clock::now();
 		time_t now_time_t = chrono::system_clock::to_time_t(now);
 		tm now_tm = *localtime(&now_time_t);
 		for (int i = 0; i < borrowCount; i++) {
-			if (Date::timeOver(*(borrowBooks[i]->getreturnDate()), now_tm)) { // ¿¬Ã¼µÈ »óÈ²
+			if (Date::timeOver(*(borrowBooks[i]->getreturnDate()), now_tm)) { // ì—°ì²´ëœ ìƒí™©
 				if (flag) cout << "cannot borrow. due date is over. return book first." << endl;
 				return false;
 			}
 		}
-		// ¿¬Ã¼µÇÁöµµ ¾Ê¾Ò°í ´ëÃâ ±Ç¼öµµ °¡´ÉÇØ¼­ ´ëÃâ °¡´É 
+		// ì—°ì²´ë˜ì§€ë„ ì•Šì•˜ê³  ëŒ€ì¶œ ê¶Œìˆ˜ë„ ê°€ëŠ¥í•´ì„œ ëŒ€ì¶œ ê°€ëŠ¥ 
 		return true;
 	}
 	// else if (borrowCount == 0) return true;
 	else {
 		if (flag) cout << "cannot borrow. you already borrowed 2 books." << endl;
-		return false; // ´ëÃâ ±Ç¼ö ÃÊ°ú·Î ´ëÃâ ºÒ°¡ 
+		return false; // ëŒ€ì¶œ ê¶Œìˆ˜ ì´ˆê³¼ë¡œ ëŒ€ì¶œ ë¶ˆê°€ 
 	}
 }
 
