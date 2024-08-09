@@ -6,11 +6,13 @@
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QLineEdit>
+#include <QComboBox>
+#include <QPushButton>
 
-class rentreturnwidget:public QWidget
+class rentReturnWidget:public QWidget
 {
 public:
-    rentreturnwidget();
+    rentReturnWidget();
 };
 
 #endif // RENTRETURNWIDGET_H
