@@ -59,7 +59,6 @@ void bookwidget::printBookList(vector<Book>& books){
         bookList->insertRow(i);
         item = new QTableWidgetItem(tr(books[i].getName()));
         bookList->setItem(i,0,item);
-        //item->setText("testaaaaaaaaaaaaa");
         item = new QTableWidgetItem(tr(books[i].getWriter()));
         bookList->setItem(i,1,item);
         item = new QTableWidgetItem(tr(books[i].getIsbn()));
@@ -84,7 +83,6 @@ void bookwidget::printAddedBook(vector<Book>& books){
     bookList->insertRow(i);
     item = new QTableWidgetItem(tr(books[i].getName()));
     bookList->setItem(i,0,item);
-    //item->setText("testaaaaaaaaaaaaa");
     item = new QTableWidgetItem(tr(books[i].getWriter()));
     bookList->setItem(i,1,item);
     item = new QTableWidgetItem(tr(books[i].getIsbn()));

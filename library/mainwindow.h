@@ -36,8 +36,8 @@ public:
     ~MainWindow();
     QAction* makeAction(QString icon, QString text, QString shortcut, QString tooltip, QObject* receiver, const char* slot);
 public slots:
-    void openFile();
-    void saveFile();
+    void openBookFile();
+    void saveBookFile();
     void quit();
 
     void addBook();

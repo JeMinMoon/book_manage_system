@@ -8,7 +8,7 @@ Person::Person(const char* s, int size) { borrowCount = 0; strcpy(name, s); id =
 char* Person::getName() { return name; }
 int Person::getId() { return id; }
 int Person::getborrowCount() { return borrowCount; }
-Book** Person::getborrowBooks() { return borrowBooks; }
+Book* Person::getborrowBooks() { return borrowBooks; }
 
 
 
@@ -19,7 +19,7 @@ bool Person::checkCanBorrow(int flag) {
 		time_t now_time_t = chrono::system_clock::to_time_t(now);
 		tm now_tm = *localtime(&now_time_t);
 		for (int i = 0; i < borrowCount; i++) {
-			if (Date::timeOver(*(borrowBooks[i]->getreturnDate()), now_tm)) { // 연체된 상황
+            if (Date::timeOver(*(borrowBooks[i].getreturnDate()), now_tm)) { // 연체된 상황
 				if (flag) cout << "cannot borrow. due date is over. return book first." << endl;
 				return false;
 			}
@@ -35,11 +35,11 @@ bool Person::checkCanBorrow(int flag) {
 }
 
 void Person::Borrow(Book* b) {
-	borrowBooks[borrowCount] = b;
+    borrowBooks[borrowCount] = *b;
 	borrowCount++;
 }
 
 void Person::returnBook() {
 	borrowCount--;
-	borrowBooks[borrowCount] = NULL;
+    borrowBooks[borrowCount] = Book();
 }

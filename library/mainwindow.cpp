@@ -108,7 +108,7 @@ QAction* MainWindow::makeAction(QString icon, QString text, QString shortcut, QS
     return tmp;
 }
 
-void MainWindow::openFile(){
+void MainWindow::openBookFile(){
     QString filename = QFileDialog::getOpenFileName(this,"Select file to open",
                                                     QDir::home().dirName(),"Text File(*.txt *.html *.c *.cpp *.h)");
     if(!filename.length())return;
@@ -119,7 +119,7 @@ void MainWindow::openFile(){
     bookWin->printBookList(bm->books);
 }
 
-void MainWindow::saveFile(){
+void MainWindow::saveBookFile(){
     QString filename = QFileDialog::getOpenFileName(this,"Select file to open",
                                                     QDir::home().dirName(),"Text File(*.txt *.html *.c *.cpp *.h)");
     if(!filename.length())return;
@@ -188,11 +188,12 @@ void MainWindow::searchB(){
     bookWin->printBookList(bm->books);
 }
 
-void MainWindow::addU(){
+void MainWindow::addU(){ // Id 입력이 안 되고 있음!!!
     QString uname = userWin->getText(0);
     int i = bm->addUser(uname.toUtf8().constData());
     QString str = QString("회원가입이 완료되었습니다. 당신의 id는 %1입니다").arg(i);
     QMessageBox::question(this, "-", str, QMessageBox::Ok);
+    userWin->printAddedUser(bm->user_list);
     userWin->clear();
 }
 

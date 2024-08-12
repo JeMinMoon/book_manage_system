@@ -9,6 +9,9 @@
 #include <QHeaderView>
 #include <QGroupBox>
 #include <QPushButton>
+#include "Person.h"
+#include "book.h"
+#include <vector>
 class userwidget: public QWidget {
 private:
     QWidget* button;
@@ -17,9 +20,12 @@ public:
     QPushButton* add;
     QPushButton* del;
     QPushButton* search;
+    QTableWidget* userList;
     userwidget();
     QString getText(int);
     void clear();
+    void printUserList(vector<Person>& users);
+    void printAddedUser(vector<Person>& users);
 };
 
 #endif // USERWIDGET_H

@@ -144,10 +144,10 @@ void BookManage::PrintAllUsers() {
 		cout << "빌린 책 총 " << i.getborrowCount() << "권" << endl;
 		if (i.getborrowCount() != 0) {
 			cout << "빌린 책 목록" << endl;
-			Book** blist = i.getborrowBooks();
+            Book* blist = i.getborrowBooks();
 			for (int j = 0; j < i.getborrowCount(); j++) {
 				cout << j << ">>" << endl;
-				blist[j]->printBook();
+                blist[j].printBook();
 			}
 		}
 		cout << endl;
@@ -157,11 +157,14 @@ void BookManage::PrintAllUsers() {
 void BookManage::Borrow(int idx_b, int idx_u) {
 	if (books[idx_b].getState() == 0) { // 책은 있어 
 		// 사람도 있어?
-		if (user_list[idx_u].checkCanBorrow(1) == 1) { // ㅇㅇ 있어 
-			cout << "today date: 08/01" << endl;
-			cout << "return due date: 08/15" << endl;
+        if (user_list[idx_u].checkCanBorrow(1) == 1) { // ㅇㅇ 있어
+            //Date d;
+            //tm now = d.getNow_time_t(); // 현재 날짜 저장
+            //tm after_two_weeks = d.getAfterTwoWeek(); // 현재 날짜 + 2주
+            //cout << "today date: " << put_time(&now, "%Y-%m-%d") << endl;
+            //cout << "return due date: " << put_time(&after_two_weeks, "%Y-%m-%d") <<  endl;
 			// 대출 상태 토글 및 대출일, 반납일, 빌린사람 추가
-			books[idx_b].borrow(&user_list[idx_u]);
+            books[idx_b].borrow();
 			// 사용자의 빌린 책 권수랑 빌린 책 목록 변경
 			user_list[idx_u].Borrow(&books[idx_b]);
 		}
@@ -172,9 +175,9 @@ void BookManage::Borrow(int idx_b, int idx_u) {
 }
 
 void BookManage::returnBook(int idx_b, int idx_u) {
-	Book** blist = user_list[idx_u].getborrowBooks();
+    Book* blist = user_list[idx_u].getborrowBooks();
 	for (int i = 0; i < user_list[idx_u].getborrowCount(); i++) {
-		if (books[idx_b].getIsbn() == blist[i]->getIsbn()) {
+        if (books[idx_b].getIsbn() == blist[i].getIsbn()) {
 			// 대출 상태 토글 및 대출일, 반납일, 빌린사람 내용 삭제 
 			books[idx_b].returnBook();
 			// 사용자의 빌린 책 권수랑 빌린 책 목록 변경 
@@ -220,15 +223,15 @@ void BookManage::printUserOverdue() {
 	bool check = false;
 	for (auto& i : user_list) {
 		if (!i.checkCanBorrow(0)) {
-			Book** blist = i.getborrowBooks();
+            Book* blist = i.getborrowBooks();
 			auto now = chrono::system_clock::now();
 			time_t now_time_t = chrono::system_clock::to_time_t(now);
 			tm now_tm = *localtime(&now_time_t);
 			for (int j = 0; j < i.getborrowCount(); j++) {
-				if (Date::timeOver(*(blist[j]->getreturnDate()), now_tm)) {
+                if (Date::timeOver(*(blist[j].getreturnDate()), now_tm)) {
 					cout << endl;
 					cout << j << ">>" << endl;
-					blist[j]->printBook();
+                    blist[j].printBook();
 					check = true;
 				}
 			}

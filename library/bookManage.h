@@ -1,6 +1,7 @@
 ﻿#ifndef _BOOKMANAGE_H
 #define _BOOKMANAGE_H
 #include "book.h"
+#include "person.h"
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -10,10 +11,11 @@ using namespace std;
 
 class BookManage {
 
-	vector<Person> user_list;
+
 public:
     //vector<Book> books_searched;
     vector<Book> books;
+    vector<Person> user_list;
 	BookManage();
 	~BookManage();
 	bool canBorrow(Book* b);

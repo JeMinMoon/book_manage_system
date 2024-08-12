@@ -7,7 +7,6 @@ userwidget::userwidget(){
     userWinLayout->setContentsMargins(0,0,0,0);
 
     // layout 좌측에 들어가는 표
-    QTableWidget* userList = new QTableWidget();
     userList = new QTableWidget(0, 9);
     QStringList labels;
     labels << tr("이름") << tr("ID") << tr("대출여부") << tr("대출한 책 제목1") << tr("대출일") << tr("반납일") << tr("대출한 책 제목2") << tr("대출일") << tr("반납일");
@@ -48,5 +47,67 @@ QString userwidget::getText(int i){
 void userwidget::clear(){
     for (int i =0;i<2;i++){
         uLineEdit[i]->clear();
+    }
+}
+
+void userwidget::printUserList(vector<Person>& users){
+    QTableWidgetItem* item;
+    for(int i=0; i<users.size(); i++){
+        userList->insertRow(i);
+        item = new QTableWidgetItem(tr(users[i].getName()));
+        userList->setItem(i,0,item);
+        item = new QTableWidgetItem(users[i].getId());
+        userList->setItem(i,1,item);
+        if(users[i].getborrowCount()){ // 빌린 책이 있으면 O, 없으면 X
+            Book* borrowBooks = users[i].getborrowBooks();
+            item = new QTableWidgetItem(tr("O"));
+            userList->setItem(i,2,item);
+            item = new QTableWidgetItem(borrowBooks[0].getName());
+            userList->setItem(i,3,item);
+            item = new QTableWidgetItem(Date::tmToQString(borrowBooks[0].getborrowDate(),"%Y-%m-%d"));
+            userList->setItem(i,4,item);
+            item = new QTableWidgetItem(Date::tmToQString(borrowBooks[0].getreturnDate(),"%Y-%m-%d"));
+            userList->setItem(i,5,item);
+            item = new QTableWidgetItem(borrowBooks[1].getName());
+            userList->setItem(i,6,item);
+            item = new QTableWidgetItem(Date::tmToQString(borrowBooks[1].getborrowDate(),"%Y-%m-%d"));
+            userList->setItem(i,7,item);
+            item = new QTableWidgetItem(Date::tmToQString(borrowBooks[1].getreturnDate(),"%Y-%m-%d"));
+            userList->setItem(i,8,item);
+        }
+        else{
+            item = new QTableWidgetItem(tr("X"));
+            userList->setItem(i,2,item);
+        }
+    }
+}
+void userwidget::printAddedUser(vector<Person>& users){
+    QTableWidgetItem* item;
+    int i = users.size()-1;
+    userList->insertRow(i);
+    item = new QTableWidgetItem(tr(users[i].getName()));
+    userList->setItem(i,0,item);
+    item = new QTableWidgetItem(users[i].getId());
+    userList->setItem(i,1,item);
+    if(users[i].getborrowCount()){ // 빌린 책이 있으면 O, 없으면 X
+        Book* borrowBooks = users[i].getborrowBooks();
+        item = new QTableWidgetItem(tr("O"));
+        userList->setItem(i,2,item);
+        item = new QTableWidgetItem(borrowBooks[0].getName());
+        userList->setItem(i,3,item);
+        item = new QTableWidgetItem(Date::tmToQString(borrowBooks[0].getborrowDate(),"%Y-%m-%d"));
+        userList->setItem(i,4,item);
+        item = new QTableWidgetItem(Date::tmToQString(borrowBooks[0].getreturnDate(),"%Y-%m-%d"));
+        userList->setItem(i,5,item);
+        item = new QTableWidgetItem(borrowBooks[1].getName());
+        userList->setItem(i,6,item);
+        item = new QTableWidgetItem(Date::tmToQString(borrowBooks[1].getborrowDate(),"%Y-%m-%d"));
+        userList->setItem(i,7,item);
+        item = new QTableWidgetItem(Date::tmToQString(borrowBooks[1].getreturnDate(),"%Y-%m-%d"));
+        userList->setItem(i,8,item);
+    }
+    else{
+        item = new QTableWidgetItem(tr("X"));
+        userList->setItem(i,2,item);
     }
 }
