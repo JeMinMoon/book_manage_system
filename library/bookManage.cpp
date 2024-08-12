@@ -1,6 +1,10 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include "bookManage.h"
+#include "bookwidget.h"
 #include <QDebug>
+#include <QMessageBox>
+#include <QInputDialog>
+#include <QApplication>
 
 BookManage::BookManage() {}
 BookManage::~BookManage() {
@@ -15,34 +19,13 @@ void BookManage::addBook(const char* name, const char* writer, const char* isbn)
 	books.push_back(*(new Book(name, writer, isbn)));
 }
 
+/*
 void BookManage::deleteBook(int index) {
 	books.erase(books.begin() + index);
-	cout << "Delete Success" << endl;
+    qDebug() << "delete success";
+    bookwidget::printBookList(books_searched);
 }
-
-int BookManage::searchByName(const char* name) {
-    qDebug() << "start searching... ";
-
-	books_searched.clear();
-	for (int i = 0; i < books.size(); i++) {
-		if (!strcmp(books[i].getName(), name)) {
-			cout << books_searched.size() << ". bookname: " << books[i].getName() << endl;
-			cout << "writer: " << books[i].getWriter() << endl << endl;
-			books_searched.push_back(&books[i]);		// 찾은 책들을 books_searched 벡터에 넣음 
-		}
-	}
-
-	if (books_searched.size() == 0) {
-		cout << "cannot find book: " << endl;
-		return -1;
-	}
-	else {
-		int n;
-		cout << "select number: ";
-		cin >> n;
-		return searchByIsbn(books_searched[n]->getIsbn()); // 여기 뭔가 안 이쁨...
-	}
-}
+*/
 
 int BookManage::searchByWriter(const char* writer) {
 	for (int i = 0; i < books.size(); i++) {
@@ -52,6 +35,7 @@ int BookManage::searchByWriter(const char* writer) {
 	}
 	return -1; // 못 찾은 경우
 }
+/*
 int BookManage::searchByIsbn(const char* isbn) {
 	for (int i = 0; i < books.size(); i++) {
 		if (!strcmp(books[i].getIsbn(), isbn)) {
@@ -60,6 +44,7 @@ int BookManage::searchByIsbn(const char* isbn) {
 	}
 	return -1; // 못 찾은 경우
 }
+*/
 
 void BookManage::saveBookFile(const char* file_directory) {
 	try {

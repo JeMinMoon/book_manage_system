@@ -19,6 +19,7 @@
 #include <QHeaderView>
 #include <QGroupBox>
 #include <QMessageBox>
+#include <QInputDialog>
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
     // mdiArea 생성
@@ -169,18 +170,22 @@ void MainWindow::addB(){
     qDebug()<< bwriter;
     qDebug() << bISBN;
     bm->addBook(bname.toUtf8().constData(), bwriter.toUtf8().constData(), bISBN.toUtf8().constData());
-    //QMessageBox::question(this, "-", "책 추가가 완료되었습니다", QMessageBox::Ok);
-    //bookWin->clear();
     bookWin->printAddedBook(bm->books);
+    QMessageBox::question(this, "-", "책 추가가 완료되었습니다", QMessageBox::Ok);
+    bookWin->clear();
 }
 
 void MainWindow::delB(){
     QString bname = bookWin->getText(0);
-    // bm->deleteBook(bm->searchByName());
+    int idx = bookWin->searchByName(bname.toUtf8().constData(), bm->books);
+    if (idx != -1) bookWin->deleteBook(idx, bm->books);
+    bookWin->printBookList(bm->books);
 }
 
 void MainWindow::searchB(){
     QString bname = bookWin->getText(0);
+    int idx = bookWin->searchByName(bname.toUtf8().constData(), bm->books);
+    bookWin->printBookList(bm->books);
 }
 
 void MainWindow::addU(){
@@ -189,9 +194,6 @@ void MainWindow::addU(){
     QString str = QString("회원가입이 완료되었습니다. 당신의 id는 %1입니다").arg(i);
     QMessageBox::question(this, "-", str, QMessageBox::Ok);
     userWin->clear();
-    // 회원가입 완료
-    // 당신의 아이디는 ~~
-    // clear 하기
 }
 
 void MainWindow::delU(){

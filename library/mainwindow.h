@@ -15,7 +15,7 @@
 #include "userwidget.h"
 #include <QFileDialog>
 #include <QByteArray>
-
+#include <vector>
 class QAction;
 class QMdiArea;
 class QTextEdit;
@@ -31,12 +31,10 @@ class MainWindow : public QMainWindow
     bookwidget* bookWin;
     userwidget* userWin;
     BookManage* bm = new BookManage();
-
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QAction* makeAction(QString icon, QString text, QString shortcut, QString tooltip, QObject* receiver, const char* slot);
-
 public slots:
     void openFile();
     void saveFile();

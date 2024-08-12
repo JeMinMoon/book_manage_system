@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include <QButtonGroup>
 #include <QTableWidgetItem>
+#include <QMessageBox>
+#include <QInputDialog>
 bookwidget::bookwidget() {
     QHBoxLayout* bookWinLayout = new QHBoxLayout();
     bookWinLayout->setContentsMargins(0,0,0,0);
@@ -57,7 +59,7 @@ void bookwidget::printBookList(vector<Book>& books){
         bookList->insertRow(i);
         item = new QTableWidgetItem(tr(books[i].getName()));
         bookList->setItem(i,0,item);
-        item->setText("testaaaaaaaaaaaaa");
+        //item->setText("testaaaaaaaaaaaaa");
         item = new QTableWidgetItem(tr(books[i].getWriter()));
         bookList->setItem(i,1,item);
         item = new QTableWidgetItem(tr(books[i].getIsbn()));
@@ -82,7 +84,7 @@ void bookwidget::printAddedBook(vector<Book>& books){
     bookList->insertRow(i);
     item = new QTableWidgetItem(tr(books[i].getName()));
     bookList->setItem(i,0,item);
-    item->setText("testaaaaaaaaaaaaa");
+    //item->setText("testaaaaaaaaaaaaa");
     item = new QTableWidgetItem(tr(books[i].getWriter()));
     bookList->setItem(i,1,item);
     item = new QTableWidgetItem(tr(books[i].getIsbn()));
@@ -98,4 +100,49 @@ void bookwidget::printAddedBook(vector<Book>& books){
     bookList->setItem(i,4,item); // 대출일
     item = new QTableWidgetItem(Date::tmToQString(books[i].getreturnDate(),"%Y-%m-%d"));
     bookList->setItem(i,5,item); // 반납예정일
+}
+
+int bookwidget::searchByName(const char* name, vector<Book>& books) {
+    qDebug() << "start searching... ";
+
+    books_searched.clear();
+    bookList->clearContents();
+    for (int i = 0; i < books.size(); i++) {
+        if (!strcmp(books[i].getName(), name)) {
+            books_searched.push_back(books[i]);		// 찾은 책들을 books_searched 벡터에 넣음
+        }
+    }
+
+    if (books_searched.size() == 0) {
+        QMessageBox::question(this, "-", "요청한 책을 찾을 수 없습니다", QMessageBox::Ok);
+        return -1;
+    }
+    else {
+        printBookList(books_searched);
+        bool ok;
+        int n = QInputDialog::getText(this, "...", "원하는 책의 번호를 선택하세요", QLineEdit::Normal, NULL, &ok).toInt();
+        if (n>books_searched.size() || n <0) {
+            QMessageBox::question(this, "-", "요청한 책을 찾을 수 없습니다.", QMessageBox::Ok);
+            return -1;
+        }
+        else  {
+            return searchByIsbn(books_searched[n].getIsbn(), books);
+        }
+    }
+}
+
+int bookwidget::searchByIsbn(const char* isbn, vector<Book>& books) {
+    for (int i = 0; i < books.size(); i++) {
+        if (!strcmp(books[i].getIsbn(), isbn)) {
+            return i;
+        }
+    }
+    return -1; // 못 찾은 경우
+}
+
+void bookwidget::deleteBook(int index, vector<Book>& books) {
+    books.erase(books.begin() + index);
+    qDebug() << "delete success";
+    bookList->clearContents();
+    QMessageBox::question(this, "-", "책 삭제가 완료되었습니다.", QMessageBox::Ok);
 }
