@@ -58,8 +58,8 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     // file menu 생성 후 menubar 에 추가
     QMenu* fileMenu = menuBar->addMenu("&File");
     // file menu 내에 action 생성
-    QAction* openAct = makeAction(":/images/open.png", "&open", "ctrl+O", "open existing file", this, SLOT(openFile()));
-    QAction* saveAct = makeAction(":/images/save.png", "&save", "ctrl+S", "save file", this, SLOT(saveFile()));
+    QAction* openAct = makeAction(":/images/open.png", "&open", "ctrl+O", "open existing file", this, SLOT(openBookFile()));
+    QAction* saveAct = makeAction(":/images/save.png", "&save", "ctrl+S", "save file", this, SLOT(saveBookFile()));
     QAction* quitAct = makeAction(":/images/exit.png", "&quit", "ctrl+Q", "quit program", qApp, SLOT(quit()));
     // file menu 내에 action 추가
     fileMenu->addAction(openAct);
