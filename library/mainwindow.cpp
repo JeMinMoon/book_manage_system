@@ -120,8 +120,8 @@ void MainWindow::openBookFile(){
 }
 
 void MainWindow::saveBookFile(){
-    QString filename = QFileDialog::getOpenFileName(this,"Select file to open",
-                                                    QDir::home().dirName(),"Text File(*.txt *.html *.c *.cpp *.h)");
+    QString filename = QFileDialog::getSaveFileName(this, "Select file to save", QDir::home().dirName(),"Text File(*.txt *.html *.c *.cpp *.h)");
+
     if(!filename.length())return;
 
     QByteArray byteArray = filename.toUtf8();
