@@ -1,4 +1,4 @@
-﻿#ifndef _BOOK_H
+#ifndef _BOOK_H
 #define _BOOK_H
 
 #include <chrono>
@@ -7,27 +7,27 @@
 
 
 class Book {
-	int state;					// 0: not borrowed yet, 1: already borrowed
-	char name[30];				// bookname
-	char writer[30];
-	char isbn[20];					// isbn
-                // info of borrower
-	tm borrowDate;				// 책 대출일, 4자리 월일 형식으로 표기, 없을시 0으로 표기 
-	tm returnDate;				// 책 반납일, 4자리 월일 형식으로 표기, 없을시 0으로 표기 
+    int state;					// 0: not borrowed yet, 1: already borrowed
+    char name[30];				// bookname
+    char writer[30];
+    char isbn[20];					// isbn
+        // info of borrower
+    tm borrowDate;				// 책 대출일, 4자리 월일 형식으로 표기, 없을시 0으로 표기
+    tm returnDate;				// 책 반납일, 4자리 월일 형식으로 표기, 없을시 0으로 표기
 public :
-	Book();
-	Book(const char* name, const char* writer, const char* isbn);
-	int getState();
-	char* getName();
-	char* getWriter();
-	char* getIsbn();
+    Book();
+    Book(const char* name, const char* writer, const char* isbn);
+    int getState();
+    char* getName();
+    char* getWriter();
+    char* getIsbn();
 
-	tm* getborrowDate();
-	tm* getreturnDate();
-	void stateToggle();			// toggle state
+    tm* getborrowDate();
+    tm* getreturnDate();
+    void stateToggle();			// toggle state
     void borrow();
-	void returnBook();
-	void printBook();
+    void returnBook();
+    void printBook();
 
 };
 

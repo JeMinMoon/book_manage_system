@@ -18,11 +18,10 @@
 
 class rentReturnWidget:public QWidget
 {
-private:
-    QTableWidget* bookList;
-    QTableWidget* userList;
 public:
     rentReturnWidget();
+    QTableWidget* bookList;
+    QTableWidget* userList;
 public slots:
     void printBookList(vector<Book>& books);
     void printUserList(vector<Person>& users);

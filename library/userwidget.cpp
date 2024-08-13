@@ -2,6 +2,7 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QStringList>
+#include <QString>
 userwidget::userwidget(){
     QHBoxLayout* userWinLayout = new QHBoxLayout();
     userWinLayout->setContentsMargins(0,0,0,0);
@@ -56,7 +57,9 @@ void userwidget::printUserList(vector<Person>& users){
         userList->insertRow(i);
         item = new QTableWidgetItem(tr(users[i].getName()));
         userList->setItem(i,0,item);
-        item = new QTableWidgetItem(users[i].getId());
+        QString tmpid;
+        tmpid.setNum(users[i].getId());
+        item = new QTableWidgetItem(tmpid);
         userList->setItem(i,1,item);
         if(users[i].getborrowCount()){ // 빌린 책이 있으면 O, 없으면 X
             Book* borrowBooks = users[i].getborrowBooks();
@@ -81,13 +84,16 @@ void userwidget::printUserList(vector<Person>& users){
         }
     }
 }
+
 void userwidget::printAddedUser(vector<Person>& users){
     QTableWidgetItem* item;
     int i = users.size()-1;
     userList->insertRow(i);
     item = new QTableWidgetItem(tr(users[i].getName()));
     userList->setItem(i,0,item);
-    item = new QTableWidgetItem(users[i].getId());
+    QString tmpid;
+    tmpid.setNum(users[i].getId());
+    item = new QTableWidgetItem(tmpid); // item 생성시 int로 생성하는게 안되는듯 -> qstring으로 변환해줌
     userList->setItem(i,1,item);
     if(users[i].getborrowCount()){ // 빌린 책이 있으면 O, 없으면 X
         Book* borrowBooks = users[i].getborrowBooks();
@@ -111,3 +117,37 @@ void userwidget::printAddedUser(vector<Person>& users){
         userList->setItem(i,2,item);
     }
 }
+
+
+void userwidget::printUserByIdx(vector<Person>& users, int idx){
+    QTableWidgetItem* item;
+    userList->insertRow(idx);
+    item = new QTableWidgetItem(tr(users[idx].getName()));
+    userList->setItem(idx,0,item);
+    QString tmpid;
+    tmpid.setNum(users[idx].getId());
+    item = new QTableWidgetItem(tmpid);
+    userList->setItem(idx,1,item);
+    if(users[idx].getborrowCount()){ // 빌린 책이 있으면 O, 없으면 X
+        Book* borrowBooks = users[idx].getborrowBooks();
+        item = new QTableWidgetItem(tr("O"));
+        userList->setItem(idx,2,item);
+        item = new QTableWidgetItem(borrowBooks[0].getName());
+        userList->setItem(idx,3,item);
+        item = new QTableWidgetItem(Date::tmToQString(borrowBooks[0].getborrowDate(),"%Y-%m-%d"));
+        userList->setItem(idx,4,item);
+        item = new QTableWidgetItem(Date::tmToQString(borrowBooks[0].getreturnDate(),"%Y-%m-%d"));
+        userList->setItem(idx,5,item);
+        item = new QTableWidgetItem(borrowBooks[1].getName());
+        userList->setItem(idx,6,item);
+        item = new QTableWidgetItem(Date::tmToQString(borrowBooks[1].getborrowDate(),"%Y-%m-%d"));
+        userList->setItem(idx,7,item);
+        item = new QTableWidgetItem(Date::tmToQString(borrowBooks[1].getreturnDate(),"%Y-%m-%d"));
+        userList->setItem(idx,8,item);
+    }
+    else{
+        item = new QTableWidgetItem(tr("X"));
+        userList->setItem(idx,2,item);
+    }
+}
+

@@ -20,6 +20,7 @@
 #include <QGroupBox>
 #include <QMessageBox>
 #include <QInputDialog>
+
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
     bm = new BookManage();
@@ -204,14 +205,18 @@ void MainWindow::addB(){
 void MainWindow::delB(){
     QString bname = bookWin->getText(0);
     int idx = bookWin->searchByName(bname.toUtf8().constData(), bm->books);
-    if (idx != -1) bookWin->deleteBook(idx, bm->books);
-    //bookWin->printBookList(bm->books);
+    if (idx != -1) {
+        bookWin->deleteBook(idx, bm->books);
+        rentWin->bookList->clearContents();
+    }
+    bookWin->printBookList(bm->books);
+    rentWin->printBookList(bm->books);
 }
 
 void MainWindow::searchB(){
     QString bname = bookWin->getText(0);
     int idx = bookWin->searchByName(bname.toUtf8().constData(), bm->books);
-    //bookWin->printBookList(bm->books);
+    bookWin->printBookList(bm->books);
 }
 
 void MainWindow::addU(){ // Id 입력이 안 되고 있음!!!
@@ -225,11 +230,27 @@ void MainWindow::addU(){ // Id 입력이 안 되고 있음!!!
 }
 
 void MainWindow::delU(){
-
+    QString uname = userWin->getText(0);
+    QString uID = userWin->getText(1);
+    bm->deleteUser(uname.toUtf8().constData(), uID.toInt());
+    QString str = QString("회원 삭제가 완료되었습니다.");
+    QMessageBox::question(this, "-", str, QMessageBox::Ok);
+    userWin->userList->clearContents();
+    userWin->printUserList(bm->user_list);
+    rentWin->userList->clearContents();
+    rentWin->printUserList(bm->user_list);
 }
 
 void MainWindow::searchU(){
-
+    QString uname = userWin->getText(0);
+    QString uID = userWin->getText(1);
+    int ok = bm->findUserIdx(uname.toUtf8().constData(), uID.toInt());
+    QString str = QString("회원 정보를 찾을 수 없습니다.");
+    if (ok == -1) QMessageBox::question(this, "-", str, QMessageBox::Ok);
+    else {
+        userWin->userList->clearContents();
+        userWin->printUserByIdx(bm->user_list, ok);
+    }
 }
 
 

@@ -26,6 +26,7 @@ public:
     void clear();
     void printUserList(vector<Person>& users);
     void printAddedUser(vector<Person>& users);
+    void printUserByIdx(vector<Person>& users, int idx);
 };
 
 #endif // USERWIDGET_H
