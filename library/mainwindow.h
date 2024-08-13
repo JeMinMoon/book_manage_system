@@ -30,14 +30,17 @@ class MainWindow : public QMainWindow
     QMdiSubWindow* rentSubWin = new QMdiSubWindow;
     bookwidget* bookWin;
     userwidget* userWin;
-    BookManage* bm = new BookManage();
+    rentReturnWidget* rentWin;
+    BookManage* bm;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QAction* makeAction(QString icon, QString text, QString shortcut, QString tooltip, QObject* receiver, const char* slot);
 public slots:
     void openBookFile();
+    void openUserFile();
     void saveBookFile();
+    void saveUserFile();
     void quit();
 
     void addBook();

@@ -22,6 +22,7 @@
 #include <QInputDialog>
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
+    bm = new BookManage();
     // mdiArea 생성
     mdiArea = new QMdiArea(this);
     setCentralWidget(mdiArea);
@@ -48,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     userSubWin->setWidget(userWin);
 
     // rentSubWin 생성
-    QWidget* rentWin = new rentReturnWidget();
+    rentWin = new rentReturnWidget();
     rentSubWin->setWidget(rentWin);
 
     // menubar 생성
@@ -58,12 +59,16 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     // file menu 생성 후 menubar 에 추가
     QMenu* fileMenu = menuBar->addMenu("&File");
     // file menu 내에 action 생성
-    QAction* openAct = makeAction(":/images/open.png", "&open", "ctrl+O", "open existing file", this, SLOT(openBookFile()));
-    QAction* saveAct = makeAction(":/images/save.png", "&save", "ctrl+S", "save file", this, SLOT(saveBookFile()));
+    QAction* openBookAct = makeAction(":/images/open.png", "book open", "ctrl+O", "open existing file", this, SLOT(openBookFile()));
+    QAction* saveBookAct = makeAction(":/images/save.png", "book save", "ctrl+S", "save book file", this, SLOT(saveBookFile()));
+    QAction* openUserAct = makeAction(":/images/open.png", "user open", "", "open existing file", this, SLOT(openUserFile()));
+    QAction* saveUserAct = makeAction(":/images/save.png", "user save", "", "save user file", this, SLOT(saveUserFile()));
     QAction* quitAct = makeAction(":/images/exit.png", "&quit", "ctrl+Q", "quit program", qApp, SLOT(quit()));
     // file menu 내에 action 추가
-    fileMenu->addAction(openAct);
-    fileMenu->addAction(saveAct);
+    fileMenu->addAction(openBookAct);
+    fileMenu->addAction(saveBookAct);
+    fileMenu->addAction(openUserAct);
+    fileMenu->addAction(saveUserAct);
     fileMenu->addAction(quitAct);
 
     // book menu 내에 action 생성
@@ -117,6 +122,18 @@ void MainWindow::openBookFile(){
     bm->loadBookFile(byteArray.constData());
     bm->printAllBooks();
     bookWin->printBookList(bm->books);
+    rentWin->printBookList(bm->books);
+}
+void MainWindow::openUserFile(){
+    QString filename = QFileDialog::getOpenFileName(this,"Select file to open",
+                                                    QDir::home().dirName(),"Text File(*.txt *.html *.c *.cpp *.h)");
+    if(!filename.length())return;
+
+    QByteArray byteArray = filename.toUtf8();
+    bm->loadPersonFile(byteArray.constData());
+    bm->PrintAllUsers();
+    userWin->printUserList(bm->user_list);
+    rentWin->printUserList(bm->user_list);
 }
 
 void MainWindow::saveBookFile(){
@@ -126,6 +143,14 @@ void MainWindow::saveBookFile(){
 
     QByteArray byteArray = filename.toUtf8();
     bm->saveBookFile(byteArray.constData());
+}
+void MainWindow::saveUserFile(){
+    QString filename = QFileDialog::getSaveFileName(this, "Select file to save", QDir::home().dirName(),"Text File(*.txt *.html *.c *.cpp *.h)");
+
+    if(!filename.length())return;
+
+    QByteArray byteArray = filename.toUtf8();
+    bm->savePersonFile(byteArray.constData());
 }
 
 void MainWindow::quit() {}
@@ -171,6 +196,7 @@ void MainWindow::addB(){
     qDebug() << bISBN;
     bm->addBook(bname.toUtf8().constData(), bwriter.toUtf8().constData(), bISBN.toUtf8().constData());
     bookWin->printAddedBook(bm->books);
+    rentWin->printAddedBook(bm->books);
     QMessageBox::question(this, "-", "책 추가가 완료되었습니다", QMessageBox::Ok);
     bookWin->clear();
 }
@@ -179,13 +205,13 @@ void MainWindow::delB(){
     QString bname = bookWin->getText(0);
     int idx = bookWin->searchByName(bname.toUtf8().constData(), bm->books);
     if (idx != -1) bookWin->deleteBook(idx, bm->books);
-    bookWin->printBookList(bm->books);
+    //bookWin->printBookList(bm->books);
 }
 
 void MainWindow::searchB(){
     QString bname = bookWin->getText(0);
     int idx = bookWin->searchByName(bname.toUtf8().constData(), bm->books);
-    bookWin->printBookList(bm->books);
+    //bookWin->printBookList(bm->books);
 }
 
 void MainWindow::addU(){ // Id 입력이 안 되고 있음!!!
@@ -194,6 +220,7 @@ void MainWindow::addU(){ // Id 입력이 안 되고 있음!!!
     QString str = QString("회원가입이 완료되었습니다. 당신의 id는 %1입니다").arg(i);
     QMessageBox::question(this, "-", str, QMessageBox::Ok);
     userWin->printAddedUser(bm->user_list);
+    rentWin->printAddedUser(bm->user_list);
     userWin->clear();
 }
 

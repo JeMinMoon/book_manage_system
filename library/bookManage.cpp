@@ -113,15 +113,17 @@ void BookManage::loadPersonFile(const char* file_directory) {
 		}
 		Person temp;
 		while (ifs.read(reinterpret_cast<char*>(&temp), sizeof(Person))) {
-			user_list.push_back(temp);
+            qDebug() << temp.getName(); // test
+            user_list.push_back(temp);
+            qDebug() << user_list.back().getName(); //test
 		}
 
-		ifs.close();
+        ifs.close();
 	}
 	catch (const char* s) {
-		cout << s;
+        qDebug() << s;
 	}
-	cout << "로드 완료\n";
+    qDebug() << "로드 완료\n";
 }
 
 void BookManage::printAllBooks() {
@@ -140,17 +142,16 @@ void BookManage::printAllBooks() {
 
 void BookManage::PrintAllUsers() {
 	for (auto& i : user_list) {
-		cout << "회원명:" << i.getName() << " Id:" << i.getId() << endl;
-		cout << "빌린 책 총 " << i.getborrowCount() << "권" << endl;
+        qDebug() << "회원명:" << i.getName() << " Id:" << i.getId();
+        qDebug() << "빌린 책 총 " << i.getborrowCount() << "권";
 		if (i.getborrowCount() != 0) {
-			cout << "빌린 책 목록" << endl;
+            qDebug() << "빌린 책 목록";
             Book* blist = i.getborrowBooks();
 			for (int j = 0; j < i.getborrowCount(); j++) {
-				cout << j << ">>" << endl;
+                qDebug() << j << ">>";
                 blist[j].printBook();
 			}
 		}
-		cout << endl;
 	}
 }
 

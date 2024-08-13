@@ -1,6 +1,7 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "book.h"
+#include <QDebug>
 using namespace std;
 tm null_tm = { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
 Book::Book() { state = 0; borrowDate = null_tm; returnDate = null_tm; }
@@ -39,12 +40,12 @@ void Book::returnBook() {
 }
 
 void Book::printBook() {
-	cout << "도서명: " << name << " / 저자: " << writer << " / ISBN: " << isbn << endl;
+    qDebug() << "도서명: " << name << " / 저자: " << writer << " / ISBN: " << isbn;
 	if (!state) {
-		cout << "대출 가능 여부: O" << endl;
+        qDebug() << "대출 가능 여부: O";
 	}
 	else {
-		cout << "대출 가능 여부: X" << endl;
-		cout << "대출일: " << put_time(getborrowDate(), "%Y-%m-%d") << " / 반납예정일: " << put_time(&returnDate, "%Y-%m-%d") << '\n';
+        qDebug() << "대출 가능 여부: X";
+        qDebug() << "대출일: " << Date::tmToQString(getborrowDate(), "%Y-%m-%d") << " / 반납예정일: " << Date::tmToQString(&returnDate, "%Y-%m-%d") << '\n';
 	}
 }
