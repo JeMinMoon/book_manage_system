@@ -249,7 +249,9 @@ void MainWindow::searchU(){
     if (ok == -1) QMessageBox::question(this, "-", str, QMessageBox::Ok);
     else {
         userWin->userList->clearContents();
-        userWin->printUserByIdx(bm->user_list, ok);
+        vector<Person> user_searched;
+        user_searched.push_back(bm->user_list[ok]);
+        userWin->printUserList(user_searched);
     }
 }
 
