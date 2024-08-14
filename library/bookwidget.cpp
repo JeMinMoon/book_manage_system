@@ -70,10 +70,12 @@ void bookwidget::printBookList(vector<Book>& books){
             item = new QTableWidgetItem(tr("X"));
         }
         bookList->setItem(i,3,item);
+
+        QString nulldate = "1900-01-01";
         item = new QTableWidgetItem(Date::tmToQString(books[i].getborrowDate(),"%Y-%m-%d"));
-        bookList->setItem(i,4,item); // 대출일
+        if (Date::tmToQString(books[i].getborrowDate(),"%Y-%m-%d") != nulldate) bookList->setItem(i,4,item); // 대출일
         item = new QTableWidgetItem(Date::tmToQString(books[i].getreturnDate(),"%Y-%m-%d"));
-        bookList->setItem(i,5,item); // 반납예정일
+        if (Date::tmToQString(books[i].getreturnDate(),"%Y-%m-%d") != nulldate) bookList->setItem(i,5,item); // 반납예정일
     }
 }
 void bookwidget::printAddedBook(vector<Book>& books){
@@ -93,10 +95,12 @@ void bookwidget::printAddedBook(vector<Book>& books){
         item = new QTableWidgetItem(tr("X"));
     }
     bookList->setItem(i,3,item);
+
+    QString nulldate = "1900-01-01";
     item = new QTableWidgetItem(Date::tmToQString(books[i].getborrowDate(),"%Y-%m-%d"));
-    bookList->setItem(i,4,item); // 대출일
+    if (Date::tmToQString(books[i].getborrowDate(),"%Y-%m-%d") != nulldate) bookList->setItem(i,4,item); // 대출일
     item = new QTableWidgetItem(Date::tmToQString(books[i].getreturnDate(),"%Y-%m-%d"));
-    bookList->setItem(i,5,item); // 반납예정일
+    if (Date::tmToQString(books[i].getreturnDate(),"%Y-%m-%d") != nulldate) bookList->setItem(i,5,item); // 반납예정일
 }
 
 int bookwidget::searchByName(const char* name, vector<Book>& books) {
