@@ -121,7 +121,7 @@ void userwidget::printAddedUser(vector<Person>& users){
 
 void userwidget::printUserByIdx(vector<Person>& users, int idx){
     QTableWidgetItem* item;
-    userList->insertRow(idx);
+    userList->insertRow(0);
     item = new QTableWidgetItem(tr(users[idx].getName()));
     userList->setItem(idx,0,item);
     QString tmpid;
