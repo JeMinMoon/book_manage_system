@@ -216,6 +216,15 @@ void MainWindow::delB(){
 void MainWindow::searchB(){
     QString bname = bookWin->getText(0);
     int idx = bookWin->searchByName(bname.toUtf8().constData(), bm->books);
+    if (idx != -1) {
+        bookWin->bookList->clearContents();
+        vector<Book> tmpB;
+        tmpB.push_back(bm->books[idx]);
+        bookWin->printBookList(tmpB);
+        // QMessageBox::question(this, "-", "요청한 책을 찾았습니다.", QMessageBox::Ok);
+        Sleep(500);
+    }
+    bookWin->bookList->clearContents();
     bookWin->printBookList(bm->books);
 }
 
