@@ -20,7 +20,7 @@
 #include <QGroupBox>
 #include <QMessageBox>
 #include <QInputDialog>
-
+#include <QThread>
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
     bm = new BookManage();
@@ -222,7 +222,7 @@ void MainWindow::searchB(){
         tmpB.push_back(bm->books[idx]);
         bookWin->printBookList(tmpB);
         // QMessageBox::question(this, "-", "요청한 책을 찾았습니다.", QMessageBox::Ok);
-        Sleep(500);
+        QThread::sleep(3);
     }
     bookWin->bookList->clearContents();
     bookWin->printBookList(bm->books);

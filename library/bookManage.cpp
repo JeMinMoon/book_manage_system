@@ -117,7 +117,7 @@ void BookManage::loadPersonFile(const char* file_directory) {
             user_list.push_back(temp);
             qDebug() << user_list.back().getName(); //test
         }
-
+        givID=user_list.size();
         ifs.close();
     }
     catch (const char* s) {
