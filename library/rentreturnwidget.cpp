@@ -77,7 +77,9 @@ void rentReturnWidget::printUserList(vector<Person>& users){
         userList->insertRow(i);
         item = new QTableWidgetItem(tr(users[i].getName()));
         userList->setItem(i,0,item);
-        item = new QTableWidgetItem(users[i].getId());
+        QString tmpid;
+        tmpid.setNum(users[i].getId());
+        item = new QTableWidgetItem(tmpid);
         userList->setItem(i,1,item);
         if(users[i].getborrowCount()){ // 빌린 책이 있으면 O, 없으면 X
             Book* borrowBooks = users[i].getborrowBooks();
@@ -132,7 +134,9 @@ void rentReturnWidget::printAddedUser(vector<Person>& users){
     userList->insertRow(i);
     item = new QTableWidgetItem(tr(users[i].getName()));
     userList->setItem(i,0,item);
-    item = new QTableWidgetItem(users[i].getId());
+    QString tmpid;
+    tmpid.setNum(users[i].getId());
+    item = new QTableWidgetItem(tmpid); // item 생성시 int로 생성하는게 안되는듯 -> qstring으로 변환해줌
     userList->setItem(i,1,item);
     if(users[i].getborrowCount()){ // 빌린 책이 있으면 O, 없으면 X
         Book* borrowBooks = users[i].getborrowBooks();
