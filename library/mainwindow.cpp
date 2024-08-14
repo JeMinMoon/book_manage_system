@@ -51,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
     // rentSubWin 생성
     rentWin = new rentReturnWidget();
+    connect(rentWin->submitButton,SIGNAL(clicked(bool)),this,SLOT(rentReturnBook()));
     rentSubWin->setWidget(rentWin);
 
     // menubar 생성
@@ -174,6 +175,31 @@ void MainWindow::rentBook(){
 
 void MainWindow::returnBook(){
     mdiArea->setActiveSubWindow(rentSubWin);
+}
+void MainWindow::rentReturnBook(){
+    QString combo_text = rentWin->rentReturnBox->currentText();
+    QString book = rentWin->bookEdit->text();
+    QString user = rentWin->userEdit->text();
+    int idx_b = bookWin->searchByName(book.toUtf8().constData(), bm->books);
+    int idx_u = bm->findUserIdx(user.toUtf8().constData());
+    qDebug() << combo_text;
+    qDebug() << idx_b;
+    qDebug() << idx_u;
+    if(combo_text=="대출"){
+        bm->Borrow(idx_b,idx_u);
+    }
+    else if(combo_text=="반납"){
+        bm->returnBook(idx_b,idx_u);
+    }
+    //QTableWidgetItem* item;
+    bookWin->bookList->clearContents();
+    userWin->userList->clearContents();
+    rentWin->bookList->clearContents();
+    rentWin->userList->clearContents();
+    bookWin->printBookList(bm->books);
+    userWin->printUserList(bm->user_list);
+    rentWin->printBookList(bm->books);
+    rentWin->printUserList(bm->user_list);
 }
 
 void MainWindow::addUser(){

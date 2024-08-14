@@ -117,7 +117,7 @@ void BookManage::loadPersonFile(const char* file_directory) {
             user_list.push_back(temp);
             qDebug() << user_list.back().getName(); //test
         }
-        givID=user_list.size();
+        givID = user_list.size();
         ifs.close();
     }
     catch (const char* s) {
@@ -194,6 +194,16 @@ void BookManage::returnBook(int idx_b, int idx_u) {
 int BookManage::findUserIdx(const char* s, int id) {
     for (int i = 0; i < user_list.size(); i++) {
         if ((!strcmp(user_list[i].getName(), s)) && (id == user_list[i].getId())) {
+            return i;
+        }
+    }
+    qDebug() << "cannot find user";
+    return -1;
+}
+
+int BookManage::findUserIdx(const char* s) {
+    for (int i = 0; i < user_list.size(); i++) {
+        if ((!strcmp(user_list[i].getName(), s))) {
             return i;
         }
     }

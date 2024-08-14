@@ -22,6 +22,12 @@ public:
     rentReturnWidget();
     QTableWidget* bookList;
     QTableWidget* userList;
+    QFrame* frame1_2;
+    QFrame* frame1_1;
+    QPushButton* submitButton;
+    QLineEdit* bookEdit;
+    QLineEdit* userEdit;
+    QComboBox* rentReturnBox;
 public slots:
     void printBookList(vector<Book>& books);
     void printUserList(vector<Person>& users);

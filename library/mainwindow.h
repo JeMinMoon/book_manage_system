@@ -54,6 +54,7 @@ public slots:
 
     void rentBook();
     void returnBook();
+    void rentReturnBook();
 
     void addB();
     void delB();

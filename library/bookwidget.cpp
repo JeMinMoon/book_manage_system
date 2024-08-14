@@ -126,7 +126,7 @@ int bookwidget::searchByName(const char* name, vector<Book>& books) {
             return -1;
         }
         else  {
-            qDebug() << tmp;
+            //qDebug() << tmp;
             return tmp;
         }
     }

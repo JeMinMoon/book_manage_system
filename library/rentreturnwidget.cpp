@@ -5,16 +5,16 @@ rentReturnWidget::rentReturnWidget() {
     QFrame* frame1 = new QFrame(this);//입력부분
     QFrame* frame2 = new QFrame(this);//검색된 도서,회원 list 출력되는 부분
     QHBoxLayout* frame1_Layout = new QHBoxLayout(frame1);
-    QFrame* frame1_1 = new QFrame(frame1);//도서명, 회원명 입력받는 부분
-    QFrame* frame1_2 = new QFrame(frame1);//대출/반납 선택, 확인 버튼
+    frame1_1 = new QFrame(frame1);//도서명, 회원명 입력받는 부분
+    frame1_2 = new QFrame(frame1);//대출/반납 선택, 확인 버튼
     QFormLayout* formLayout = new QFormLayout(frame1_1);
-    QLineEdit* bookEdit = new QLineEdit(frame1_1); //도서명 입력
-    QLineEdit* userEdit = new QLineEdit(frame1_1); //회원명 입력
+    bookEdit = new QLineEdit(frame1_1); //도서명 입력
+    userEdit = new QLineEdit(frame1_1); //회원명 입력
     QHBoxLayout* frame1_2_Layout = new QHBoxLayout(frame1_2);
-    QComboBox* rentReturnBox = new QComboBox(frame1_2);
+    rentReturnBox = new QComboBox(frame1_2);
     rentReturnBox->addItem("대출");
     rentReturnBox->addItem("반납");
-    QPushButton* submitButton = new QPushButton("확인",frame1_2);
+    submitButton = new QPushButton("확인",frame1_2);
     bookList = new QTableWidget(0, 6);
     QStringList book_labels;
     book_labels << tr("제목") << tr("저자") << tr("ISBN") << tr("대출가능여부") << tr("대출일") << tr("반납일");

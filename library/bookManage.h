@@ -39,6 +39,7 @@ public:
     void printOne(int idx);
 
     // user 관련 내용
+    int findUserIdx(const char* s);
     int findUserIdx(const char* s, int id);
     int addUser(const char* s);
     void deleteUser(const char* s, int id);
