@@ -21,6 +21,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QThread>
+#include <QTimer>
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 
     bm = new BookManage();
@@ -287,6 +288,12 @@ void MainWindow::searchU(){
         vector<Person> user_searched;
         user_searched.push_back(bm->user_list[ok]);
         userWin->printUserList(user_searched);
+
+        // 사용자의 정보를 출력한 후 3초 후에 전체 리스트를 갱신
+        QTimer::singleShot(3000, [this]() {
+            userWin->userList->clearContents();
+            userWin->printUserList(bm->user_list);
+        });
     }
 }
 
