@@ -178,7 +178,7 @@ void BookManage::Borrow(int idx_b, int idx_u) {
 void BookManage::returnBook(int idx_b, int idx_u) {
     Book* blist = user_list[idx_u].getborrowBooks();
     for (int i = 0; i < user_list[idx_u].getborrowCount(); i++) {
-        if (books[idx_b].getIsbn() == blist[i].getIsbn()) {
+        if (!strcmp(books[idx_b].getIsbn(),blist[i].getIsbn())) {
             // 대출 상태 토글 및 대출일, 반납일, 빌린사람 내용 삭제
             books[idx_b].returnBook();
             // 사용자의 빌린 책 권수fin랑 빌린 책 목록 변경
